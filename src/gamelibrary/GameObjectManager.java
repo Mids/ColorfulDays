@@ -1,5 +1,6 @@
 package gamelibrary;
 
+import loot.GameFrameSettings;
 import loot.ImageResourceManager;
 import loot.InputManager;
 import loot.graphics.Viewport;
@@ -8,10 +9,12 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class GameObjectManager {
+	public static final double DELTATIME = 0.166666;
 	private static Map<String, GameObject> GameObjectMap = new HashMap<String, GameObject>();
 	private static ImageResourceManager imageResourceManager;
 	private static InputManager inputManager;
 	private static Viewport viewport;
+	private static GameFrameSettings gameFrameSettings;
 
 	public static ImageResourceManager getImageResourceManager() {
 		return imageResourceManager;
@@ -59,5 +62,13 @@ public class GameObjectManager {
 		for (Map.Entry<String, GameObject> entry : GameObjectMap.entrySet()) {
 			entry.getValue().Awake();
 		}
+	}
+
+	public static GameFrameSettings getGameFrameSettings() {
+		return gameFrameSettings;
+	}
+
+	public static void setGameFrameSettings(GameFrameSettings gameFrameSettings) {
+		GameObjectManager.gameFrameSettings = gameFrameSettings;
 	}
 }
