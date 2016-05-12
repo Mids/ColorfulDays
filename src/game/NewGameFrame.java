@@ -1,13 +1,18 @@
+package game;
 import java.awt.Point;
 import java.awt.event.KeyEvent;
 import java.awt.event.MouseEvent;
 
+import gamelibrary.GameObject;
+import gamelibrary.GameObjectManager;
+import gameobject.MyObject;
 import loot.GameFrame;
 import loot.GameFrameSettings;
 import loot.graphics.DrawableObject3D;
 import loot.graphics.TextBox;
 import loot.graphics.Viewport;
 
+@SuppressWarnings("serial")
 public class NewGameFrame extends GameFrame {
 
 	public NewGameFrame(GameFrameSettings settings) {
@@ -16,7 +21,7 @@ public class NewGameFrame extends GameFrame {
 
 	}
 
-	class Origin extends DrawableObject3D {
+	class Origin extends GameObject {
 		public Origin() {
 			super(0, 0, 0, 50, 50, images.GetImage("origin"));
 		}
@@ -25,14 +30,19 @@ public class NewGameFrame extends GameFrame {
 	@Override
 	public boolean Initialize() {
 		// TODO Auto-generated method stub
-		images.LoadImage("Images/image.jpg", "img");
 		images.LoadImage("Images/image2.jpg", "origin");
+		
+		GameObjectManager.setImageResourceManager(images);
+		GameObjectManager.setInputManager(inputs);
 
 		myObject = new MyObject();
 		origin = new Origin();
 		tb_physics = new TextBox(10, 10, 200, 70);
 		viewport = new Viewport(0, 0, settings.canvas_width, settings.canvas_height);
 
+		GameObjectManager.PutObject(origin, "Origin");
+		myObject.Start();
+		
 		viewport.children.add(myObject);
 		viewport.children.add(origin);
 		viewport.children.add(tb_physics);
@@ -48,6 +58,9 @@ public class NewGameFrame extends GameFrame {
 		inputs.BindKey(KeyEvent.VK_E, 0);
 		inputs.BindKey(KeyEvent.VK_SPACE, 1);
 		inputs.BindMouseButton(MouseEvent.BUTTON1, 2);
+		
+		
+		
 
 		return true;
 
@@ -70,35 +83,13 @@ public class NewGameFrame extends GameFrame {
 			origin.pos_x = 0;
 			origin.pos_y = 0;
 		}
-
-		// 이번 프레임에 space bar를 누르기 시작했다면
-		// 공전 운동을 하는 요소의 물리값을 현재 원점을 기준으로 하는 초기 상태로 재설정
-		if (inputs.buttons[1].IsPressedNow() == true) {
-			myObject.pos_x = origin.pos_x;
-			myObject.pos_y = origin.pos_y;
-			myObject.pos_z = 200 + origin.pos_z;
-
-			myObject.vel_x = 6.4;
-			myObject.vel_y = 6.4;
-			myObject.vel_z = 0;
-		}
-
-		myObject.acc_x = (origin.pos_x - myObject.pos_x) * coef_tension;
-		myObject.acc_y = (origin.pos_y - myObject.pos_y) * coef_tension;
-		myObject.acc_z = (origin.pos_z - myObject.pos_z) * coef_tension;
-
-		myObject.vel_x += myObject.acc_x;
-		myObject.vel_y += myObject.acc_y;
-		myObject.vel_z += myObject.acc_z;
-
-		myObject.pos_x += myObject.vel_x;
-		myObject.pos_y += myObject.vel_y;
-		myObject.pos_z += myObject.vel_z;
+		
+		myObject.Update();
 
 		tb_physics.text = String.format(
 				"pos: (%+.2f, %+.2f, %+.2f)\n" + "vel: (%+.2f, %+.2f, %+.2f)\n" + "acc: (%+.2f, %+.2f, %+.2f)\n" + "off: %d",
-				myObject.pos_x, myObject.pos_y, myObject.pos_z, myObject.vel_x, myObject.vel_y, myObject.vel_z,
-				myObject.acc_x, myObject.acc_y, myObject.acc_z, offset);
+				myObject.pos_x, myObject.pos_y, myObject.pos_z, myObject._velocity.x, myObject._velocity.y, myObject._velocity.z,
+				myObject._accel.x, myObject._accel.y, myObject._accel.z, offset);
 
 		offset++;
 		if (viewport.pointOfView_z <= 200 || viewport.pointOfView_z > 1000)
@@ -121,31 +112,17 @@ public class NewGameFrame extends GameFrame {
 
 	}
 
-	public static void main(String args[]) {
-		GameFrameSettings settings = new GameFrameSettings();
-		/* 여기서 settings. 을 입력하여 게임 화면 관련 설정 가능 */
+//	public static void main(String args[]) {
+//		GameFrameSettings settings = new GameFrameSettings();
+//		/* 여기서 settings. 을 입력하여 게임 화면 관련 설정 가능 */
+//
+//		NewGameFrame window = new NewGameFrame(settings); // SampleFrame 대신 여러분이
+//															// 만든 클래스 이름 넣기
+//		window.setVisible(true);
+//	}
 
-		NewGameFrame window = new NewGameFrame(settings); // SampleFrame 대신 여러분이
-															// 만든 클래스 이름 넣기
-		window.setVisible(true);
-	}
-
-	final double coef_tension = 0.001f;
 	TextBox tb_physics; // TextBox까지 입력하고 Ctrl + Space를 눌러 import 구문 자동 추가
 
-	class MyObject extends DrawableObject3D // 여기까지 적고 Ctrl + Space 한 번 입력(자동
-											// import)
-	{
-		double vel_x, vel_y, vel_z; // 원래 있던 pos_x, pos_y는 지웁니다.
-		double acc_x, acc_y, acc_z;
-
-		public MyObject() {
-			super(0, 0, 200, 50, 50, images.GetImage("img"));
-			vel_x = 6.4;
-			vel_y = 6.4;
-		}
-
-	}
 
 	MyObject myObject;
 	Origin origin;
