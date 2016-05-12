@@ -5,11 +5,13 @@ import java.util.Map;
 
 import loot.ImageResourceManager;
 import loot.InputManager;
+import loot.graphics.Viewport;
 
 public class GameObjectManager {
 	private static Map<String, GameObject> GameObjectMap = new HashMap<String, GameObject>();
 	private static ImageResourceManager imageResourceManager;
 	private static InputManager inputManager;
+	private static Viewport viewport;
 
 	public static ImageResourceManager getImageResourceManager() {
 		return imageResourceManager;
@@ -35,4 +37,11 @@ public class GameObjectManager {
 		GameObjectManager.inputManager = inputManager;
 	}
 
+	public static Viewport getViewport() {
+		return viewport;
+	}
+
+	public static void setViewport(Viewport viewport) {
+		GameObjectManager.viewport = viewport;
+	}
 }
