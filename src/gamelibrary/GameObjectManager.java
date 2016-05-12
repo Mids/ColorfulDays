@@ -1,11 +1,11 @@
 package gamelibrary;
 
-import java.util.HashMap;
-import java.util.Map;
-
 import loot.ImageResourceManager;
 import loot.InputManager;
 import loot.graphics.Viewport;
+
+import java.util.HashMap;
+import java.util.Map;
 
 public class GameObjectManager {
 	private static Map<String, GameObject> GameObjectMap = new HashMap<String, GameObject>();
@@ -29,6 +29,10 @@ public class GameObjectManager {
 		return GameObjectMap.get(key);
 	}
 
+	public static void DeleteObject(String key) {
+		GameObjectMap.remove("key");
+	}
+
 	public static InputManager getInputManager() {
 		return inputManager;
 	}
@@ -43,5 +47,17 @@ public class GameObjectManager {
 
 	public static void setViewport(Viewport viewport) {
 		GameObjectManager.viewport = viewport;
+	}
+
+	public static void Update() {
+		for (Map.Entry<String, GameObject> entry : GameObjectMap.entrySet()) {
+			entry.getValue().Update();
+		}
+	}
+
+	public static void Awake() {
+		for (Map.Entry<String, GameObject> entry : GameObjectMap.entrySet()) {
+			entry.getValue().Awake();
+		}
 	}
 }

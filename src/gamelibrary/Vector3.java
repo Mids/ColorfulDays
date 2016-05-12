@@ -2,7 +2,7 @@ package gamelibrary;
 
 import loot.graphics.Point3D;
 
-public class Vector3 extends Point3D{
+public class Vector3 extends Point3D {
 
 	public Vector3() {
 		super();

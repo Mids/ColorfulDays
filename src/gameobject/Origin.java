@@ -23,6 +23,11 @@ public class Origin extends GameObject {
 	public void Start() {
 		super.Start();
 		GameObjectManager.PutObject(this, "Origin");
+	}
+
+	@Override
+	public void Awake() {
+		super.Awake();
 		GameObjectManager.getImageResourceManager().LoadImage("Images/image2.jpg", "origin");
 		image = GameObjectManager.getImageResourceManager().GetImage("origin");
 
@@ -51,7 +56,7 @@ public class Origin extends GameObject {
 		}
 	}
 
-	public void Init(){
+	public void Init() {
 		pos_x = 0;
 		pos_y = 0;
 	}

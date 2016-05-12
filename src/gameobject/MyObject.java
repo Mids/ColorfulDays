@@ -6,13 +6,11 @@ import gamelibrary.Vector3;
 import loot.InputManager.ButtonState;
 
 public class MyObject extends GameObject {
-	private GameObject _origin;
-	private ButtonState _space;
-
+	final double coef_tension = 0.001f;
 	public Vector3 _velocity;
 	public Vector3 _accel;
-
-	final double coef_tension = 0.001f;
+	private GameObject _origin;
+	private ButtonState _space;
 
 	public MyObject() {
 
@@ -23,6 +21,11 @@ public class MyObject extends GameObject {
 	@Override
 	public void Start() {
 		GameObjectManager.PutObject(this, "MyObject");
+	}
+
+	@Override
+	public void Awake() {
+		super.Awake();
 		GameObjectManager.getImageResourceManager().LoadImage("Images/image.jpg", "img");
 		image = GameObjectManager.getImageResourceManager().GetImage("img");
 		_origin = GameObjectManager.GetObject("Origin");
@@ -60,7 +63,7 @@ public class MyObject extends GameObject {
 
 	public void Init() {
 		_velocity = new Vector3(6.4, 6.4, 0);
-		_accel = new Vector3(0,0,0);
+		_accel = new Vector3(0, 0, 0);
 	}
 
 }

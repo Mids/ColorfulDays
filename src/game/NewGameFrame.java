@@ -1,18 +1,15 @@
 package game;
 
-import java.awt.Point;
-import java.awt.event.KeyEvent;
-import java.awt.event.MouseEvent;
-
-import gamelibrary.GameObject;
 import gamelibrary.GameObjectManager;
 import gameobject.MyObject;
 import gameobject.Origin;
 import loot.GameFrame;
 import loot.GameFrameSettings;
-import loot.graphics.DrawableObject3D;
 import loot.graphics.TextBox;
 import loot.graphics.Viewport;
+
+import java.awt.event.KeyEvent;
+import java.awt.event.MouseEvent;
 
 @SuppressWarnings("serial")
 public class NewGameFrame extends GameFrame {
@@ -42,10 +39,6 @@ public class NewGameFrame extends GameFrame {
 		origin = new Origin();
 		tb_physics = new TextBox(10, 10, 200, 70);
 
-		GameObjectManager.PutObject(origin, "Origin");
-		myObject.Start();
-		origin.Start();
-
 		viewport.children.add(myObject);
 		viewport.children.add(origin);
 		viewport.children.add(tb_physics);
@@ -62,6 +55,8 @@ public class NewGameFrame extends GameFrame {
 		inputs.BindKey(KeyEvent.VK_SPACE, 1);
 		inputs.BindMouseButton(MouseEvent.BUTTON1, 2);
 
+		GameObjectManager.Awake();
+
 		return true;
 	}
 
@@ -70,8 +65,7 @@ public class NewGameFrame extends GameFrame {
 		// TODO Auto-generated method stub
 		inputs.AcceptInputs(); // 이제까지 들어온 입력을 가상 버튼에 반영
 
-		myObject.Update();
-		origin.Update();
+		GameObjectManager.Update();
 
 		tb_physics.text = String.format(
 				"pos: (%+.2f, %+.2f, %+.2f)\n" + "vel: (%+.2f, %+.2f, %+.2f)\n" + "acc: (%+.2f, %+.2f, %+.2f)",
