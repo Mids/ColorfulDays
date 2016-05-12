@@ -39,9 +39,10 @@ public class Origin extends GameObject {
 		// 현재 마우스를 누르고 있다면 원점의 위치를 현재 마우스 포인터의 위치로 설정
 		if (_mouseLeft.isPressed == true) {
 			Point pos_new_origin = viewport.GetRelativePositionFromCenter(GameObjectManager.getInputManager().pos_mouseCursor);
-			
-			pos_x = pos_new_origin.x;
-			pos_y = -pos_new_origin.y;
+
+			double ratio = viewport.pointOfView_z / viewport.view_baseDistance;
+			pos_x = pos_new_origin.x * ratio;
+			pos_y = -pos_new_origin.y * ratio;
 		}
 
 		// 현재 E 키를 누르고 있다면 원점의 위치를 화면 중앙으로 초기화
