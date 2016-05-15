@@ -33,7 +33,7 @@ public final class GameObjectManager {
 	}
 
 	public static void DeleteObject(String key) {
-		GameObjectMap.remove("key");
+		GameObjectMap.remove(key);
 	}
 
 	public static InputManager getInputManager() {
