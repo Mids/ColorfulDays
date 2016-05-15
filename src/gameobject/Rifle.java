@@ -52,8 +52,12 @@ public class Rifle extends Weapon {
 			--_coolDown;
 
 		for (Bullet bullet : _bullets) {
-			if (bullet.pos_y < _settings.canvas_height / 2 + 5)
-				bullet.Move();
+			if (bullet._isActive) {
+				if (bullet.pos_y < _settings.canvas_height / 2 + 5)
+					bullet.Move();
+				else
+					bullet.Destroy();
+			}
 		}
 	}
 
@@ -63,15 +67,29 @@ public class Rifle extends Weapon {
 			return;
 		_bullets[offset].pos_x = _player.pos_x;
 		_bullets[offset].pos_y = _player.pos_y + _player.radius_y / 2;
+		_bullets[offset]._isActive = true;
+
 		if (++offset >= _numOfBullets) offset = 0;
 		_coolDown = _coolTime;
 	}
 
+	@Override
+	public PlayerBullet[] GetBullets() {
+		return _bullets;
+	}
+
 	private class Bullet extends PlayerBullet implements Collider {
+		public boolean _isActive = false;
 		private Vector3 _speed = new Vector3(0, 10, 0);
 
 		void Move() {
 			pos_y += _speed.y;
+		}
+
+		@Override
+		public void Destroy() {
+			_isActive = false;
+			pos_y = _settings.canvas_height;
 		}
 	}
 }

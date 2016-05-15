@@ -13,4 +13,6 @@ public abstract class Enemy extends GameObject implements Collider {
 	public boolean IsCollided(Collider other) {
 		return other.getTag() == Tag.PlayerBullet;
 	}
+
+	public abstract void CheckCollision();
 }

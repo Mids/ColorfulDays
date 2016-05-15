@@ -4,7 +4,7 @@ import loot.graphics.DrawableObject3D;
 
 import java.awt.*;
 
-public class GameObject extends DrawableObject3D {
+public abstract class GameObject extends DrawableObject3D {
 	public GameObject() {
 		super();
 		// TODO Auto-generated constructor stub
@@ -84,5 +84,18 @@ public class GameObject extends DrawableObject3D {
 	 */
 	public void Update() {
 
+	}
+
+	/**
+	 * Called when the object destroyed
+	 */
+	public void Destroy() {
+
+	}
+
+	public boolean HitTest3D(GameObject other) {
+		return pos_x - radius_x <= other.pos_x + other.radius_x && pos_x + radius_x >= other.pos_x - other.radius_x &&
+				pos_y - radius_y <= other.pos_y + other.radius_y && pos_y + radius_y >= other.pos_y - other.radius_y &&
+				Double.valueOf(pos_z).equals(other.pos_z);
 	}
 }

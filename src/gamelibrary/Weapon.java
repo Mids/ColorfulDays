@@ -5,4 +5,6 @@ package gamelibrary;
  */
 public abstract class Weapon extends GameObject {
 	public abstract void Fire();
+
+	public abstract PlayerBullet[] GetBullets();
 }

@@ -20,8 +20,11 @@ public class Player extends GameObject implements Collider {
 	private ButtonState _rightButton;
 	private ButtonState _upButton;
 	private ButtonState _downButton;
-
 	private Weapon _weapon;
+
+	public Weapon getWeapon() {
+		return _weapon;
+	}
 
 	@Override
 	public void Start() {
