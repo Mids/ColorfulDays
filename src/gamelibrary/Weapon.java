@@ -1,6 +1,4 @@
-package gameobject;
-
-import gamelibrary.GameObject;
+package gamelibrary;
 
 /**
  * Created by jiny1 on 5/16/2016.

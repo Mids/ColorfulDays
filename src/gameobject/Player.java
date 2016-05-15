@@ -2,6 +2,7 @@ package gameobject;
 
 import gamelibrary.GameObject;
 import gamelibrary.GameObjectManager;
+import gamelibrary.Weapon;
 import loot.GameFrameSettings;
 import loot.InputManager.ButtonState;
 import loot.graphics.Viewport;

@@ -3,6 +3,7 @@ package gameobject;
 import gamelibrary.GameObject;
 import gamelibrary.GameObjectManager;
 import gamelibrary.Vector3;
+import gamelibrary.Weapon;
 import loot.GameFrameSettings;
 import loot.graphics.Viewport;
 
