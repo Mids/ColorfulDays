@@ -39,7 +39,7 @@ public class BackGround extends GameObject {
 	}
 
 	void Init() {
-		pos_z = 0;
+		pos_z = -0.1;
 		radius_x = 300;
 		radius_y = 800;
 		pos_y = radius_y - _settings.canvas_height / 2;

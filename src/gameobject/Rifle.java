@@ -36,8 +36,8 @@ public class Rifle extends Weapon {
 		for (int i = 0; i < _numOfBullets; i++) {
 			Bullet bullet = new Bullet();
 			bullet.pos_y = _settings.canvas_height;
-			bullet.radius_x = 2;
-			bullet.radius_y = 2;
+			bullet.radius_x = 5;
+			bullet.radius_y = 5;
 			bullet.image = bulletImage;
 			_viewport.children.add(bullet);
 			_bullets[i] = bullet;

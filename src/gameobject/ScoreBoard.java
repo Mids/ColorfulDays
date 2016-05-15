@@ -13,6 +13,8 @@ public class ScoreBoard extends TextBox {
 
 	public ScoreBoard() {
 		super(10, 10, 200, 70);
+		font = new Font(Font.SANS_SERIF, Font.PLAIN, 25);
+		foreground_color = Color.white;
 		background_color = new Color(0, 0, 0, 0);
 		GameObjectManager.setScoreBoard(this);
 	}
