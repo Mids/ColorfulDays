@@ -1,9 +1,6 @@
 package gameobject;
 
-import gamelibrary.EnemyManager;
-import gamelibrary.GameObject;
-import gamelibrary.GameObjectManager;
-import gamelibrary.Vector3;
+import gamelibrary.*;
 import loot.GameFrameSettings;
 import loot.graphics.Viewport;
 
@@ -76,7 +73,7 @@ public class FlowerManager extends EnemyManager {
 		_timeLeft = _regenTime;
 	}
 
-	private class Flower extends GameObject {
+	private class Flower extends Enemy {
 		private Vector3 _speed = new Vector3(0, -5, 0);
 
 		void Move() {

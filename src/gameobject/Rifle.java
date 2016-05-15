@@ -1,9 +1,6 @@
 package gameobject;
 
-import gamelibrary.GameObject;
-import gamelibrary.GameObjectManager;
-import gamelibrary.Vector3;
-import gamelibrary.Weapon;
+import gamelibrary.*;
 import loot.GameFrameSettings;
 import loot.graphics.Viewport;
 
@@ -70,7 +67,7 @@ public class Rifle extends Weapon {
 		_coolDown = _coolTime;
 	}
 
-	private class Bullet extends GameObject {
+	private class Bullet extends PlayerBullet implements Collider {
 		private Vector3 _speed = new Vector3(0, 10, 0);
 
 		void Move() {

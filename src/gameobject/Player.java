@@ -1,5 +1,6 @@
 package gameobject;
 
+import gamelibrary.Collider;
 import gamelibrary.GameObject;
 import gamelibrary.GameObjectManager;
 import gamelibrary.Weapon;
@@ -10,7 +11,7 @@ import loot.graphics.Viewport;
 /**
  * Created by jiny1 on 5/12/2016.
  */
-public class Player extends GameObject {
+public class Player extends GameObject implements Collider {
 	private GameFrameSettings _settings;
 	private Viewport _viewport;
 	private double _speed;
@@ -73,5 +74,15 @@ public class Player extends GameObject {
 
 		// Fire
 		if (_space.isPressed) _weapon.Fire();
+	}
+
+	@Override
+	public Tag getTag() {
+		return Tag.Player;
+	}
+
+	@Override
+	public boolean IsCollided(Collider other) {
+		return other.getTag() == Tag.Enemy || other.getTag() == Tag.EnemyBullet;
 	}
 }
