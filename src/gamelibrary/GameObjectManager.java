@@ -1,5 +1,6 @@
 package gamelibrary;
 
+import gameobject.ScoreBoard;
 import loot.GameFrameSettings;
 import loot.ImageResourceManager;
 import loot.InputManager;
@@ -15,6 +16,7 @@ public final class GameObjectManager {
 	private static InputManager inputManager;
 	private static Viewport viewport;
 	private static GameFrameSettings gameFrameSettings;
+	private static ScoreBoard scoreBoard;
 
 	public static ImageResourceManager getImageResourceManager() {
 		return imageResourceManager;
@@ -56,6 +58,7 @@ public final class GameObjectManager {
 		for (Map.Entry<String, GameObject> entry : GameObjectMap.entrySet()) {
 			entry.getValue().Update();
 		}
+		scoreBoard.Update();
 	}
 
 	public static void Awake() {
@@ -70,5 +73,13 @@ public final class GameObjectManager {
 
 	public static void setGameFrameSettings(GameFrameSettings gameFrameSettings) {
 		GameObjectManager.gameFrameSettings = gameFrameSettings;
+	}
+
+	public static ScoreBoard getScoreBoard() {
+		return scoreBoard;
+	}
+
+	public static void setScoreBoard(ScoreBoard scoreBoard) {
+		GameObjectManager.scoreBoard = scoreBoard;
 	}
 }

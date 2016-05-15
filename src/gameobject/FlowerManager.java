@@ -105,6 +105,7 @@ public class FlowerManager extends EnemyManager {
 
 		@Override
 		public void Destroy() {
+			GameObjectManager.getScoreBoard()._score++;
 			Init();
 		}
 

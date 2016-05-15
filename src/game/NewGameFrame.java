@@ -4,19 +4,18 @@ import gamelibrary.EnemyManager;
 import gamelibrary.GameObjectManager;
 import gameobject.FlowerManager;
 import gameobject.Player;
+import gameobject.ScoreBoard;
 import loot.GameFrame;
 import loot.GameFrameSettings;
-import loot.graphics.TextBox;
 import loot.graphics.Viewport;
 
-import java.awt.*;
 import java.awt.event.KeyEvent;
 import java.awt.event.MouseEvent;
 
 @SuppressWarnings("serial")
 public class NewGameFrame extends GameFrame {
 
-	TextBox tb_physics; // TextBox까지 입력하고 Ctrl + Space를 눌러 import 구문 자동 추가
+	ScoreBoard scoreBoard; // TextBox까지 입력하고 Ctrl + Space를 눌러 import 구문 자동 추가
 	Viewport viewport;
 	Player player;
 	EnemyManager enemyManager;
@@ -38,12 +37,11 @@ public class NewGameFrame extends GameFrame {
 		GameObjectManager.setViewport(viewport);
 
 		// Create initial objects
-		tb_physics = new TextBox(10, 10, 200, 70);
+		scoreBoard = new ScoreBoard();
 		player = new Player();
 		enemyManager = new FlowerManager();
 
-		tb_physics.background_color = new Color(0, 0, 0, 0);
-		viewport.children.add(tb_physics);
+		viewport.children.add(scoreBoard);
 
 		// '카메라' 설정 부분
 		viewport.pointOfView_z = 500;
@@ -74,10 +72,6 @@ public class NewGameFrame extends GameFrame {
 
 		GameObjectManager.Update();
 
-//		tb_physics.text = String.format(
-//				"pos: (%+.2f, %+.2f, %+.2f)\n" + "vel: (%+.2f, %+.2f, %+.2f)\n" + "acc: (%+.2f, %+.2f, %+.2f)",
-//				myObject.pos_x, myObject.pos_y, myObject.pos_z, myObject._velocity.x, myObject._velocity.y, myObject._velocity.z,
-//				myObject._accel.x, myObject._accel.y, myObject._accel.z);
 		return true;
 	}
 
