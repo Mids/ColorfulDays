@@ -8,7 +8,7 @@ import loot.graphics.Viewport;
 import java.util.HashMap;
 import java.util.Map;
 
-public class GameObjectManager {
+public final class GameObjectManager {
 	public static final double DELTATIME = 0.166666;
 	private static Map<String, GameObject> GameObjectMap = new HashMap<String, GameObject>();
 	private static ImageResourceManager imageResourceManager;

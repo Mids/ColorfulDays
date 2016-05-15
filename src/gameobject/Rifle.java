@@ -11,7 +11,7 @@ import java.awt.*;
 /**
  * Created by jiny1 on 5/16/2016.
  */
-public class Rifle extends GameObject {
+public class Rifle extends Weapon {
 	private final int _coolTime = 10;
 	private GameFrameSettings _settings;
 	private Viewport _viewport;
@@ -59,6 +59,7 @@ public class Rifle extends GameObject {
 		}
 	}
 
+	@Override
 	public void Fire() {
 		if (_coolDown > 0)
 			return;
@@ -67,7 +68,6 @@ public class Rifle extends GameObject {
 		if (++offset >= _numOfBullets) offset = 0;
 		_coolDown = _coolTime;
 	}
-
 
 	private class Bullet extends GameObject {
 		private Vector3 _speed = new Vector3(0, 10, 0);

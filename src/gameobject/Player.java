@@ -19,7 +19,7 @@ public class Player extends GameObject {
 	private ButtonState _upButton;
 	private ButtonState _downButton;
 
-	private Rifle _weapon;
+	private Weapon _weapon;
 
 	@Override
 	public void Start() {
