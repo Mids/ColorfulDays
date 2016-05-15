@@ -37,7 +37,7 @@ public class NewGameFrame extends GameFrame {
 		viewport = new Viewport(0, 0, settings.canvas_width, settings.canvas_height);
 		GameObjectManager.setViewport(viewport);
 
-
+		// Create initial objects
 		myObject = new MyObject();
 		origin = new Origin();
 		tb_physics = new TextBox(10, 10, 200, 70);
@@ -55,6 +55,7 @@ public class NewGameFrame extends GameFrame {
 		viewport.view_width = settings.canvas_width;
 		viewport.view_height = settings.canvas_height;
 
+		// Input settings
 		inputs.BindKey(KeyEvent.VK_E, 0);
 		inputs.BindKey(KeyEvent.VK_SPACE, 1);
 		inputs.BindMouseButton(MouseEvent.BUTTON1, 2);
