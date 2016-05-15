@@ -32,7 +32,8 @@ public class FlowerManager extends EnemyManager {
 		_viewport = GameObjectManager.getViewport();
 		_random = new Random();
 		GameObjectManager.getImageResourceManager().LoadImage("Images/flower.png", "flower");
-		Image flowerImage = GameObjectManager.getImageResourceManager().GetImage("flower");
+		GameObjectManager.getImageResourceManager().LoadImage("Images/monoflower.png", "monoflower");
+		Image flowerImage = GameObjectManager.getImageResourceManager().GetImage("monoflower");
 
 		// Init flowers
 		_flowers = new Flower[_numOfEnemys];
@@ -80,6 +81,7 @@ public class FlowerManager extends EnemyManager {
 		_timeLeft = _regenTime;
 	}
 
+	// Flower
 	private class Flower extends Enemy {
 		private boolean _isActive;
 		private Vector3 _speed = new Vector3(0, -5, 0);
@@ -91,12 +93,12 @@ public class FlowerManager extends EnemyManager {
 
 		@Override
 		public void CheckCollision() {
-			if (_isActive) {
+			if (!_isColored) {
 				PlayerBullet[] playerBullets = _player.getWeapon().GetBullets();
 				for (PlayerBullet playerBullet : playerBullets) {
 					if (playerBullet.HitTest3D(this)) {
 						playerBullet.Destroy();
-						Destroy();
+						Colorized();
 						return;
 					}
 				}
@@ -104,14 +106,22 @@ public class FlowerManager extends EnemyManager {
 		}
 
 		@Override
-		public void Destroy() {
+		public void Colorized() {
+			_isColored = true;
+			image = GameObjectManager.getImageResourceManager().GetImage("flower");
 			GameObjectManager.getScoreBoard()._score++;
+		}
+
+		@Override
+		public void Destroy() {
 			Init();
 		}
 
 		public void Init() {
+			_isColored = false;
 			_isActive = false;
 			pos_y = _settings.canvas_height;
+			image = GameObjectManager.getImageResourceManager().GetImage("monoflower");
 		}
 	}
 }
