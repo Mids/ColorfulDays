@@ -1,6 +1,7 @@
 package game;
 
 import gamelibrary.GameObjectManager;
+import gameobject.EnemyManager;
 import gameobject.MyObject;
 import gameobject.Origin;
 import gameobject.Player;
@@ -9,6 +10,7 @@ import loot.GameFrameSettings;
 import loot.graphics.TextBox;
 import loot.graphics.Viewport;
 
+import java.awt.*;
 import java.awt.event.KeyEvent;
 import java.awt.event.MouseEvent;
 
@@ -20,6 +22,7 @@ public class NewGameFrame extends GameFrame {
 	Origin origin;
 	Viewport viewport;
 	Player player;
+	EnemyManager enemyManager;
 
 	public NewGameFrame(GameFrameSettings settings) {
 		super(settings);
@@ -42,7 +45,9 @@ public class NewGameFrame extends GameFrame {
 		origin = new Origin();
 		tb_physics = new TextBox(10, 10, 200, 70);
 		player = new Player();
+		enemyManager = new EnemyManager();
 
+		tb_physics.background_color = new Color(0, 0, 0, 0);
 		viewport.children.add(myObject);
 		viewport.children.add(origin);
 		viewport.children.add(tb_physics);

@@ -13,12 +13,12 @@ import java.awt.*;
  */
 public class Rifle extends Weapon {
 	private final int _coolTime = 10;
+	private final int _numOfBullets = 20;
 	private GameFrameSettings _settings;
 	private Viewport _viewport;
 	private GameObject _player;
 	private Bullet[] _bullets;
 	private int _coolDown;
-	private int _numOfBullets = 20;
 	private int offset = 0;
 
 
