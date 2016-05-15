@@ -34,7 +34,6 @@ public class Player extends GameObject implements Collider {
 
 	@Override
 	public void Awake() {
-		super.Awake();
 		_settings = GameObjectManager.getGameFrameSettings();
 		GameObjectManager.getImageResourceManager().LoadImage("Images/player.png", "player");
 		image = GameObjectManager.getImageResourceManager().GetImage("player");

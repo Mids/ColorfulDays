@@ -2,6 +2,7 @@ package game;
 
 import gamelibrary.EnemyManager;
 import gamelibrary.GameObjectManager;
+import gameobject.BackGround;
 import gameobject.FlowerManager;
 import gameobject.Player;
 import gameobject.ScoreBoard;
@@ -19,6 +20,7 @@ public class NewGameFrame extends GameFrame {
 	Viewport viewport;
 	Player player;
 	EnemyManager enemyManager;
+	BackGround backGround;
 
 	public NewGameFrame(GameFrameSettings settings) {
 		super(settings);
@@ -37,6 +39,7 @@ public class NewGameFrame extends GameFrame {
 		GameObjectManager.setViewport(viewport);
 
 		// Create initial objects
+		backGround = new BackGround();
 		scoreBoard = new ScoreBoard();
 		player = new Player();
 		enemyManager = new FlowerManager();
