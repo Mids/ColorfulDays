@@ -44,10 +44,10 @@ public abstract class Enemy extends GameObject implements Collider {
 	protected void CheckCollision() {
 		if (!_isColored) {
 			// Hit by bullet
-			PlayerBullet[] playerBullets = _player.getWeapon().GetBullets();
-			for (PlayerBullet playerBullet : playerBullets) {
-				if (playerBullet.HitTest3D(this)) {
-					playerBullet.Destroy();
+			Bullet[] playerBullets = _player.getWeapon().GetBullets();
+			for (Bullet bullet : playerBullets) {
+				if (bullet.HitTest3D(this)) {
+					bullet.Destroy();
 					Colorize();
 					return;
 				}

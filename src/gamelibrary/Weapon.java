@@ -1,6 +1,5 @@
 package gamelibrary;
 
-import loot.GameFrameSettings;
 import loot.graphics.Viewport;
 
 /**
@@ -9,32 +8,27 @@ import loot.graphics.Viewport;
 public abstract class Weapon extends GameObject {
 	private final double _coolTime = 0.15;
 	private int _numOfBullets;
-	private GameFrameSettings _settings;
 	private Viewport _viewport;
-	private GameObject _player;
-	private PlayerBullet[] _bullets;
+	private Bullet[] _bullets;
 	private double _coolDown;
 	private int offset = 0;
 
-	public PlayerBullet[] GetBullets() {
+	public Bullet[] GetBullets() {
 		return _bullets;
 	}
-	public abstract int getNumOfBullets();
 
 	@Override
 	public void Awake() {
-		_settings = GameObjectManager.getGameFrameSettings();
 		_viewport = GameObjectManager.getViewport();
-		_player = GameObjectManager.GetObject("Player");
 		_numOfBullets = getNumOfBullets();
 		InitBullets();
 
 	}
 
 	protected void InitBullets() {
-		_bullets = new PlayerBullet[_numOfBullets];
+		_bullets = new Bullet[_numOfBullets];
 		for (int i = 0; i < _numOfBullets; i++) {
-			PlayerBullet bullet = getBullet();
+			Bullet bullet = getBullet();
 			_viewport.children.add(bullet);
 			_bullets[i] = bullet;
 		}
@@ -45,7 +39,7 @@ public abstract class Weapon extends GameObject {
 		if (_coolDown > 0)
 			_coolDown -= Time.getTime().getDeltaTime();
 
-		for (PlayerBullet bullet : _bullets) {
+		for (Bullet bullet : _bullets) {
 			bullet.Update();
 		}
 	}
@@ -59,5 +53,7 @@ public abstract class Weapon extends GameObject {
 		_coolDown = _coolTime;
 	}
 
-	protected abstract PlayerBullet getBullet();
+	public abstract int getNumOfBullets();
+
+	protected abstract Bullet getBullet();
 }
