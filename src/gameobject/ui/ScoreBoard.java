@@ -1,4 +1,4 @@
-package gameobject;
+package gameobject.ui;
 
 import gamelibrary.GameObjectManager;
 import gamelibrary.Time;

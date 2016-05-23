@@ -1,7 +1,7 @@
 package gamelibrary;
 
-import gameobject.BackGround;
-import gameobject.Player;
+import gameobject.ui.BackGround;
+import gameobject.player.Player;
 
 /**
  * Created by jiny1 on 5/16/2016.
@@ -69,5 +69,10 @@ public abstract class Enemy extends GameObject implements Collider {
 	public void Update() {
 		Move();
 		CheckCollision();
+		Fire();
+	}
+
+	protected void Fire(){
+
 	}
 }

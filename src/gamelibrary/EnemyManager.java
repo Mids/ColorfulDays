@@ -1,6 +1,6 @@
 package gamelibrary;
 
-import gameobject.Player;
+import gameobject.player.Player;
 import loot.GameFrameSettings;
 import loot.graphics.Viewport;
 

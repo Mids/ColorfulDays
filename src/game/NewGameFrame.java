@@ -3,10 +3,10 @@ package game;
 import gamelibrary.EnemyManager;
 import gamelibrary.GameObjectManager;
 import gamelibrary.Time;
-import gameobject.BackGround;
-import gameobject.FlowerManager;
-import gameobject.Player;
-import gameobject.ScoreBoard;
+import gameobject.enemy.AnimalManager;
+import gameobject.ui.BackGround;
+import gameobject.player.Player;
+import gameobject.ui.ScoreBoard;
 import loot.GameFrame;
 import loot.GameFrameSettings;
 import loot.graphics.Viewport;
@@ -43,7 +43,7 @@ public class NewGameFrame extends GameFrame {
 		backGround = new BackGround();
 		scoreBoard = new ScoreBoard();
 		player = new Player();
-		enemyManager = new FlowerManager();
+		enemyManager = new AnimalManager();
 
 		viewport.children.add(scoreBoard);
 

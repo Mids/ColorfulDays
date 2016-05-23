@@ -1,6 +1,6 @@
 package gamelibrary;
 
-import gameobject.ScoreBoard;
+import gameobject.ui.ScoreBoard;
 import loot.GameFrameSettings;
 import loot.ImageResourceManager;
 import loot.InputManager;

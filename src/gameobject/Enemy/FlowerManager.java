@@ -1,4 +1,4 @@
-package gameobject;
+package gameobject.enemy;
 
 import gamelibrary.Enemy;
 import gamelibrary.EnemyManager;

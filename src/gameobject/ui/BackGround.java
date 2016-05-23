@@ -1,4 +1,4 @@
-package gameobject;
+package gameobject.ui;
 
 import gamelibrary.GameObject;
 import gamelibrary.GameObjectManager;

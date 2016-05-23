@@ -1,4 +1,4 @@
-package gameobject;
+package gameobject.player;
 
 import gamelibrary.*;
 import loot.GameFrameSettings;

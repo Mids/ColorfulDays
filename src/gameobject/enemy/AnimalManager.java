@@ -1,4 +1,4 @@
-package gameobject;
+package gameobject.enemy;
 
 import gamelibrary.*;
 
@@ -33,6 +33,9 @@ public class AnimalManager extends EnemyManager {
 		private Vector3 _speed = new Vector3(300, 0, 0);
 		private double randStart;
 
+		private Weapon _weapon;
+
+
 		@Override
 		public void Init() {
 			super.Init();
@@ -50,6 +53,10 @@ public class AnimalManager extends EnemyManager {
 		public void Colorize() {
 			super.Colorize();
 			image = GameObjectManager.getImageResourceManager().GetImage("flower");
+		}
+		@Override
+		protected void Fire() {
+			_weapon.Fire();
 		}
 	}
 }
