@@ -71,8 +71,8 @@ public class AnimalManager extends EnemyManager {
 
     @Override
     public void RegenerateEnemy() {
-        _animals[offset].pos_x = _random.nextInt(_settings.canvas_width - 100) - _settings.canvas_width / 2 + 50;
-        _animals[offset].pos_y = _settings.canvas_height / 2 + 50;
+        _animals[offset].pos_x = _random.nextInt(_settings.canvas_width - (int) _animals[offset].radius_x * 2) - _settings.canvas_width / 2 + _animals[offset].radius_x;
+        _animals[offset].pos_y = _settings.canvas_height / 2 + _animals[offset].radius_y;
         _animals[offset]._isActive = true;
 
         if (++offset >= _numOfEnemys) offset = 0;
@@ -82,7 +82,7 @@ public class AnimalManager extends EnemyManager {
 
     private class Animal extends Enemy {
         boolean _isActive;
-        private Vector3 _speed = new Vector3(0, -5, 0);
+        private Vector3 _speed = new Vector3(300, -300, 0);
 
         void Init() {
             _isColored = false;
@@ -93,7 +93,8 @@ public class AnimalManager extends EnemyManager {
         }
 
         void Move() {
-            pos_y += _speed.y;
+            pos_y += Time.getTime().getDeltaTime() * _speed.y;
+            pos_x += Time.getTime().getDeltaTime() * _speed.x * Math.sin(10 * pos_y / _settings.canvas_height);
             CheckCollision();
         }
 
