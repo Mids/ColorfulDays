@@ -10,6 +10,8 @@ import static java.lang.Math.PI;
  * Created by Jin on 2016-05-16.
  */
 public class AnimalManager extends EnemyManager {
+	private final int REGENTIME = 20;
+	private final int NUMOFENEMIES = 20;
 
 	@Override
 	public void Start() {
@@ -27,6 +29,16 @@ public class AnimalManager extends EnemyManager {
 	@Override
 	protected Enemy getEnemyInstance() {
 		return new Animal();
+	}
+
+	@Override
+	public int getRegenTime() {
+		return REGENTIME;
+	}
+
+	@Override
+	public int getNumOfEnemies() {
+		return NUMOFENEMIES;
 	}
 
 	private class Animal extends Enemy {

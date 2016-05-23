@@ -8,6 +8,8 @@ import gamelibrary.GameObjectManager;
  * Created by jiny1 on 5/16/2016.
  */
 public class FlowerManager extends EnemyManager {
+	private final int REGENTIME = 20;
+	private final int NUMOFENEMIES = 20;
 
 	@Override
 	public void Start() {
@@ -25,6 +27,16 @@ public class FlowerManager extends EnemyManager {
 	@Override
 	protected Enemy getEnemyInstance() {
 		return new Flower();
+	}
+
+	@Override
+	public int getRegenTime() {
+		return REGENTIME;
+	}
+
+	@Override
+	public int getNumOfEnemies() {
+		return NUMOFENEMIES;
 	}
 
 	// Flower

@@ -1,6 +1,5 @@
 package gamelibrary;
 
-import gameobject.player.Player;
 import loot.GameFrameSettings;
 import loot.graphics.Viewport;
 
@@ -10,43 +9,41 @@ import java.util.Random;
  * Created by jiny1 on 5/16/2016.
  */
 public abstract class EnemyManager extends GameObject {
-	private final int _regenTime = 20;
-	private final int _numOfEnemys = 20;
+	private int _regenTime;
+	private int _numOfEnemies;
 
 	private GameFrameSettings _settings;
 	private Viewport _viewport;
-	private Player _player;
-	private Enemy[] _enemys;
+	private Enemy[] _enemies;
 	private Random _random;
 	private int _timeLeft;
 	private int offset;
 
 	public void RegenerateEnemy() {
-		_enemys[offset].pos_x = _random.nextInt(_settings.canvas_width - (int) _enemys[offset].radius_x * 2) - _settings.canvas_width / 2 + _enemys[offset].radius_x;
-		_enemys[offset].pos_y = _settings.canvas_height / 2 + _enemys[offset].radius_y;
-		_enemys[offset]._isActive = true;
+		_enemies[offset].pos_x = _random.nextInt(_settings.canvas_width - (int) _enemies[offset].radius_x * 2) - _settings.canvas_width / 2 + _enemies[offset].radius_x;
+		_enemies[offset].pos_y = _settings.canvas_height / 2 + _enemies[offset].radius_y;
+		_enemies[offset]._isActive = true;
 
-		if (++offset >= _numOfEnemys) offset = 0;
+		if (++offset >= _numOfEnemies) offset = 0;
 
 		_timeLeft = _regenTime;
 	}
 
 	@Override
 	public void Awake() {
-
+		_regenTime = getRegenTime();
+		_numOfEnemies = getNumOfEnemies();
 		_settings = GameObjectManager.getGameFrameSettings();
 		_viewport = GameObjectManager.getViewport();
 		_random = new Random();
 
-		_player = (Player) GameObjectManager.GetObject("Player");
-
 		// Init flowers
-		_enemys = new Enemy[_numOfEnemys];
-		for (int i = 0; i < _numOfEnemys; i++) {
+		_enemies = new Enemy[_numOfEnemies];
+		for (int i = 0; i < _numOfEnemies; i++) {
 			Enemy enemy = getEnemyInstance();
 			enemy.Init();
 			_viewport.children.add(enemy);
-			_enemys[i] = enemy;
+			_enemies[i] = enemy;
 		}
 
 	}
@@ -59,7 +56,7 @@ public abstract class EnemyManager extends GameObject {
 			RegenerateEnemy();
 		}
 
-		for (Enemy enemy : _enemys) {
+		for (Enemy enemy : _enemies) {
 			if (enemy._isActive) {
 				if (enemy.pos_y > -_settings.canvas_height / 2 - 50)
 					enemy.Update();
@@ -70,4 +67,8 @@ public abstract class EnemyManager extends GameObject {
 	}
 
 	protected abstract Enemy getEnemyInstance();
+
+	public abstract int getRegenTime();
+
+	public abstract int getNumOfEnemies();
 }
