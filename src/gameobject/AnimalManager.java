@@ -2,6 +2,10 @@ package gameobject;
 
 import gamelibrary.*;
 
+import java.util.Random;
+
+import static java.lang.Math.PI;
+
 /**
  * Created by Jin on 2016-05-16.
  */
@@ -27,17 +31,19 @@ public class AnimalManager extends EnemyManager {
 
 	private class Animal extends Enemy {
 		private Vector3 _speed = new Vector3(300, 0, 0);
+		private double randStart;
 
 		@Override
 		public void Init() {
 			super.Init();
 			image = GameObjectManager.getImageResourceManager().GetImage("monoflower");
+			randStart = new Random().nextDouble() * 2 * PI;
 		}
 
 		@Override
 		public void Move() {
 			super.Move();
-			pos_x += Time.getTime().getDeltaTime() * _speed.x * Math.sin(10 * pos_y / GameObjectManager.getGameFrameSettings().canvas_height);
+			pos_x += Time.getTime().getDeltaTime() * _speed.x * Math.sin(randStart + 10 * pos_y / GameObjectManager.getGameFrameSettings().canvas_height);
 		}
 
 		@Override
