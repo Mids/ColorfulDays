@@ -1,6 +1,7 @@
 package gameobject;
 
 import gamelibrary.GameObjectManager;
+import gamelibrary.Time;
 import loot.graphics.TextBox;
 
 import java.awt.*;
@@ -20,6 +21,6 @@ public class ScoreBoard extends TextBox {
 	}
 
 	public void Update() {
-		text = String.format("Colorized Enemies : %d", _score);
+		text = String.format("Colorized Enemies : %d\nFPS : %.2f", _score, 1/Time.getTime().getDeltaTime());
 	}
 }
