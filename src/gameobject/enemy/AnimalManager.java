@@ -20,7 +20,7 @@ public class AnimalManager extends EnemyManager {
 	public void Awake() {
 		GameObjectManager.getImageResourceManager().LoadImage("Images/flower.png", "flower");
 		GameObjectManager.getImageResourceManager().LoadImage("Images/monoflower.png", "monoflower");
-
+		GameObjectManager.getImageResourceManager().LoadImage("Images/bullet.png", "bullet");
 		super.Awake();
 	}
 
@@ -32,15 +32,21 @@ public class AnimalManager extends EnemyManager {
 	private class Animal extends Enemy {
 		private Vector3 _speed = new Vector3(300, 0, 0);
 		private double randStart;
-
 		private Weapon _weapon;
-
 
 		@Override
 		public void Init() {
 			super.Init();
 			image = GameObjectManager.getImageResourceManager().GetImage("monoflower");
 			randStart = new Random().nextDouble() * 2 * PI;
+			_weapon = new EnemyRifle(this);
+			_weapon.Awake();
+		}
+
+		@Override
+		public void Update() {
+			super.Update();
+			_weapon.Update();
 		}
 
 		@Override
@@ -54,6 +60,7 @@ public class AnimalManager extends EnemyManager {
 			super.Colorize();
 			image = GameObjectManager.getImageResourceManager().GetImage("flower");
 		}
+
 		@Override
 		protected void Fire() {
 			_weapon.Fire();

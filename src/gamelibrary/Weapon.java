@@ -6,7 +6,7 @@ import loot.graphics.Viewport;
  * Created by jiny1 on 5/16/2016.
  */
 public abstract class Weapon extends GameObject {
-	private final double _coolTime = 0.15;
+	private double _coolTime;
 	private int _numOfBullets;
 	private Viewport _viewport;
 	private Bullet[] _bullets;
@@ -20,6 +20,7 @@ public abstract class Weapon extends GameObject {
 	@Override
 	public void Awake() {
 		_viewport = GameObjectManager.getViewport();
+		_coolTime = getCoolTime();
 		_numOfBullets = getNumOfBullets();
 		InitBullets();
 
@@ -56,4 +57,6 @@ public abstract class Weapon extends GameObject {
 	public abstract int getNumOfBullets();
 
 	protected abstract Bullet getBullet();
+
+	protected abstract double getCoolTime();
 }

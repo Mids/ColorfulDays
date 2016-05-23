@@ -1,7 +1,7 @@
 package gamelibrary;
 
-import gameobject.ui.BackGround;
 import gameobject.player.Player;
+import gameobject.ui.BackGround;
 
 /**
  * Created by jiny1 on 5/16/2016.
@@ -55,7 +55,7 @@ public abstract class Enemy extends GameObject implements Collider {
 
 			// TODO: Hit player
 			if (_player.HitTest3D(this)) {
-				System.out.println("Game Over");
+//				System.out.println("Game Over");
 			}
 		}
 	}
@@ -72,7 +72,10 @@ public abstract class Enemy extends GameObject implements Collider {
 		Fire();
 	}
 
-	protected void Fire(){
+	/**
+	 * Not necessary
+	 */
+	protected void Fire() {
 
 	}
 }

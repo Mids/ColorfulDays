@@ -7,6 +7,8 @@ import gamelibrary.*;
  */
 public class Rifle extends Weapon {
 	private final int NUMBEROFBULLETS = 20;
+	private final double COOLTIME = 0.15;
+
 	@Override
 	public void Start() {
 		GameObjectManager.PutObject(this, "Rifle");
@@ -28,6 +30,11 @@ public class Rifle extends Weapon {
 		return new RifleBullet();
 	}
 
+	@Override
+	protected double getCoolTime() {
+		return COOLTIME;
+	}
+
 	private class RifleBullet extends PlayerBullet implements Collider {
 		public boolean _isActive = false;
 		private Vector3 _speed = new Vector3(0, 600, 0);
@@ -36,8 +43,8 @@ public class Rifle extends Weapon {
 		private GameObject _player;
 
 		RifleBullet() {
-			_player =  GameObjectManager.GetObject("Player");
-			_canvasHeight =GameObjectManager.getGameFrameSettings().canvas_height;
+			_player = GameObjectManager.GetObject("Player");
+			_canvasHeight = GameObjectManager.getGameFrameSettings().canvas_height;
 			pos_y = _canvasHeight;
 			radius_x = 5;
 			radius_y = 5;
