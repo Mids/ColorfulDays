@@ -3,7 +3,6 @@ package gameobject;
 import gamelibrary.GameObject;
 import gamelibrary.GameObjectManager;
 import gamelibrary.Time;
-import gamelibrary.Vector3;
 import loot.GameFrameSettings;
 import loot.graphics.Viewport;
 
@@ -13,7 +12,7 @@ import loot.graphics.Viewport;
 public class BackGround extends GameObject {
 	private GameFrameSettings _settings;
 	private Viewport _viewport;
-	private Vector3 _speed;
+	public static final int SPEED = -300;
 
 	@Override
 	public void Start() {
@@ -34,7 +33,7 @@ public class BackGround extends GameObject {
 
 	@Override
 	public void Update() {
-		pos_y += _speed.y * Time.getTime().getDeltaTime();
+		pos_y += SPEED * 2 * Time.getTime().getDeltaTime();
 		if (pos_y < _settings.canvas_height - radius_y)
 			pos_y = radius_y - _settings.canvas_height;
 	}
@@ -44,6 +43,5 @@ public class BackGround extends GameObject {
 		radius_x = 600;
 		radius_y = 1600;
 		pos_y = radius_y - _settings.canvas_height;
-		_speed = new Vector3(0, -600, 0);
 	}
 }

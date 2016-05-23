@@ -74,8 +74,8 @@ public class NewGameFrame extends GameFrame {
 		// TODO Auto-generated method stub
 		inputs.AcceptInputs(); // 이제까지 들어온 입력을 가상 버튼에 반영
 
-        Time.getTime().UpdateTime();
-        GameObjectManager.Update();
+		Time.getTime().UpdateTime();
+		GameObjectManager.Update();
 
 		return true;
 	}

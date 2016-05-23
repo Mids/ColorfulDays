@@ -1,6 +1,8 @@
 package gameobject;
 
-import gamelibrary.*;
+import gamelibrary.Enemy;
+import gamelibrary.EnemyManager;
+import gamelibrary.GameObjectManager;
 import loot.GameFrameSettings;
 import loot.graphics.Viewport;
 
@@ -62,7 +64,7 @@ public class FlowerManager extends EnemyManager {
 		for (Flower flower : _flowers) {
 			if (flower._isActive) {
 				if (flower.pos_y > -_settings.canvas_height / 2 - 50)
-					flower.Move();
+					flower.Update();
 				else
 					flower.Destroy();
 			}
@@ -72,8 +74,8 @@ public class FlowerManager extends EnemyManager {
 	@Override
 	public void RegenerateEnemy() {
 		// Consider enemy's radius (50)
-		_flowers[offset].pos_x = _random.nextInt(_settings.canvas_width - 100) - _settings.canvas_width / 2 + 50;
-		_flowers[offset].pos_y = _settings.canvas_height / 2 + 50;
+		_flowers[offset].pos_x = _random.nextInt(_settings.canvas_width - (int) _flowers[offset].radius_x * 2) - _settings.canvas_width / 2 + _flowers[offset].radius_x;
+		_flowers[offset].pos_y = _settings.canvas_height / 2 + _flowers[offset].radius_y;
 		_flowers[offset]._isActive = true;
 
 		if (++offset >= _numOfEnemys) offset = 0;
@@ -83,45 +85,16 @@ public class FlowerManager extends EnemyManager {
 
 	// Flower
 	private class Flower extends Enemy {
-		private boolean _isActive;
-		private Vector3 _speed = new Vector3(0, -300, 0);
-
-		void Move() {
-			pos_y += _speed.y * Time.getTime().getDeltaTime();
-			CheckCollision();
-		}
-
 		@Override
-		public void CheckCollision() {
-			if (!_isColored) {
-				PlayerBullet[] playerBullets = _player.getWeapon().GetBullets();
-				for (PlayerBullet playerBullet : playerBullets) {
-					if (playerBullet.HitTest3D(this)) {
-						playerBullet.Destroy();
-						Colorized();
-						return;
-					}
-				}
-			}
-		}
-
-		@Override
-		public void Colorized() {
-			_isColored = true;
-			image = GameObjectManager.getImageResourceManager().GetImage("flower");
-			GameObjectManager.getScoreBoard()._score++;
-		}
-
-		@Override
-		public void Destroy() {
-			Init();
-		}
-
 		public void Init() {
-			_isColored = false;
-			_isActive = false;
-			pos_y = _settings.canvas_height;
+			super.Init();
 			image = GameObjectManager.getImageResourceManager().GetImage("monoflower");
+		}
+
+		@Override
+		public void Colorize() {
+			super.Colorize();
+			image = GameObjectManager.getImageResourceManager().GetImage("flower");
 		}
 	}
 }
