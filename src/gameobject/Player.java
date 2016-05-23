@@ -1,9 +1,6 @@
 package gameobject;
 
-import gamelibrary.Collider;
-import gamelibrary.GameObject;
-import gamelibrary.GameObjectManager;
-import gamelibrary.Weapon;
+import gamelibrary.*;
 import loot.GameFrameSettings;
 import loot.InputManager.ButtonState;
 import loot.graphics.Viewport;
@@ -57,7 +54,7 @@ public class Player extends GameObject implements Collider {
 		pos_z = 0;
 		radius_x = 50;
 		radius_y = 50;
-		_speed = 30;
+		_speed = 300;
 	}
 
 	@Override
@@ -66,13 +63,13 @@ public class Player extends GameObject implements Collider {
 
 		// Move by arrow buttons
 		if (_leftButton.isPressed && pos_x > -(_settings.canvas_width / 2 - radius_x))
-			pos_x -= GameObjectManager.DELTATIME * _speed;
+			pos_x -= Time.getTime().getDeltaTime() * _speed;
 		if (_rightButton.isPressed && pos_x < _settings.canvas_width / 2 - radius_x)
-			pos_x += GameObjectManager.DELTATIME * _speed;
+			pos_x += Time.getTime().getDeltaTime() * _speed;
 		if (_upButton.isPressed && pos_y < _settings.canvas_height / 2 - radius_y)
-			pos_y += GameObjectManager.DELTATIME * _speed;
+			pos_y += Time.getTime().getDeltaTime() * _speed;
 		if (_downButton.isPressed && pos_y > -(_settings.canvas_height / 2 - radius_y))
-			pos_y -= GameObjectManager.DELTATIME * _speed;
+			pos_y -= Time.getTime().getDeltaTime() * _speed;
 
 		// Fire
 		if (_space.isPressed) _weapon.Fire();

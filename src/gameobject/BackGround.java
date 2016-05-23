@@ -2,6 +2,7 @@ package gameobject;
 
 import gamelibrary.GameObject;
 import gamelibrary.GameObjectManager;
+import gamelibrary.Time;
 import gamelibrary.Vector3;
 import loot.GameFrameSettings;
 import loot.graphics.Viewport;
@@ -33,16 +34,16 @@ public class BackGround extends GameObject {
 
 	@Override
 	public void Update() {
-		pos_y += _speed.y;
-		if (pos_y < _settings.canvas_height / 2 - radius_y)
-			pos_y = radius_y - _settings.canvas_height / 2;
+		pos_y += _speed.y * Time.getTime().getDeltaTime();
+		if (pos_y < _settings.canvas_height - radius_y)
+			pos_y = radius_y - _settings.canvas_height;
 	}
 
 	void Init() {
-		pos_z = -0.1;
-		radius_x = 300;
-		radius_y = 800;
-		pos_y = radius_y - _settings.canvas_height / 2;
-		_speed = new Vector3(0, -5, 0);
+		pos_z = -_viewport.pointOfView_z;
+		radius_x = 600;
+		radius_y = 1600;
+		pos_y = radius_y - _settings.canvas_height;
+		_speed = new Vector3(0, -600, 0);
 	}
 }

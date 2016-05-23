@@ -84,10 +84,10 @@ public class FlowerManager extends EnemyManager {
 	// Flower
 	private class Flower extends Enemy {
 		private boolean _isActive;
-		private Vector3 _speed = new Vector3(0, -5, 0);
+		private Vector3 _speed = new Vector3(0, -300, 0);
 
 		void Move() {
-			pos_y += _speed.y;
+			pos_y += _speed.y * Time.getTime().getDeltaTime();
 			CheckCollision();
 		}
 

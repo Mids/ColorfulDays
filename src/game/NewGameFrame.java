@@ -2,6 +2,7 @@ package game;
 
 import gamelibrary.EnemyManager;
 import gamelibrary.GameObjectManager;
+import gamelibrary.Time;
 import gameobject.BackGround;
 import gameobject.FlowerManager;
 import gameobject.Player;
@@ -49,7 +50,7 @@ public class NewGameFrame extends GameFrame {
 		// '카메라' 설정 부분
 		viewport.pointOfView_z = 500;
 		viewport.view_baseDistance = 500;
-		viewport.view_minDistance = 0.1;
+		viewport.view_minDistance = 100;
 		viewport.view_maxDistance = 1200;
 		viewport.view_width = settings.canvas_width;
 		viewport.view_height = settings.canvas_height;
@@ -73,7 +74,8 @@ public class NewGameFrame extends GameFrame {
 		// TODO Auto-generated method stub
 		inputs.AcceptInputs(); // 이제까지 들어온 입력을 가상 버튼에 반영
 
-		GameObjectManager.Update();
+        Time.getTime().UpdateTime();
+        GameObjectManager.Update();
 
 		return true;
 	}

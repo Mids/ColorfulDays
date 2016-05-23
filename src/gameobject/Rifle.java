@@ -80,10 +80,10 @@ public class Rifle extends Weapon {
 
 	private class Bullet extends PlayerBullet implements Collider {
 		public boolean _isActive = false;
-		private Vector3 _speed = new Vector3(0, 10, 0);
+		private Vector3 _speed = new Vector3(0, 600, 0);
 
 		void Move() {
-			pos_y += _speed.y;
+			pos_y += Time.getTime().getDeltaTime() * _speed.y;
 		}
 
 		@Override
