@@ -35,7 +35,7 @@ public class Rifle extends Weapon {
 		return COOLTIME;
 	}
 
-	private class RifleBullet extends PlayerBullet implements Collider {
+	private class RifleBullet extends PlayerBullet {
 		public boolean _isActive = false;
 		private Vector3 _speed = new Vector3(0, 600, 0);
 
