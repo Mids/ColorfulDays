@@ -8,7 +8,7 @@ import gamelibrary.GameObjectManager;
  * Created by jiny1 on 5/16/2016.
  */
 public class FlowerManager extends EnemyManager {
-	private static final String KEY = "AnimalManager";
+	private static final String KEY = "FlowerManager";
 	private final int REGENTIME = 20;
 	private final int NUMOFENEMIES = 20;
 
