@@ -8,12 +8,13 @@ import gamelibrary.GameObjectManager;
  * Created by jiny1 on 5/16/2016.
  */
 public class FlowerManager extends EnemyManager {
+	private static final String KEY = "AnimalManager";
 	private final int REGENTIME = 20;
 	private final int NUMOFENEMIES = 20;
 
 	@Override
 	public void Start() {
-		GameObjectManager.PutObject(this, "FlowerManager");
+		GameObjectManager.PutObject(this, KEY);
 	}
 
 	@Override
@@ -41,6 +42,11 @@ public class FlowerManager extends EnemyManager {
 	@Override
 	public int getNumOfEnemies() {
 		return NUMOFENEMIES;
+	}
+
+	@Override
+	public void Destroy() {
+		GameObjectManager.DeleteObject(KEY);
 	}
 
 	// Flower

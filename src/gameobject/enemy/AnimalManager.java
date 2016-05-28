@@ -10,6 +10,7 @@ import static java.lang.Math.PI;
  * Created by Jin on 2016-05-16.
  */
 public class AnimalManager extends EnemyManager {
+	private static final String KEY = "AnimalManager";
 	private final int REGENTIME = 40;
 	private final int NUMOFENEMIES = 20;
 
@@ -17,7 +18,7 @@ public class AnimalManager extends EnemyManager {
 
 	@Override
 	public void Start() {
-		GameObjectManager.PutObject(this, "AnimalManager");
+		GameObjectManager.PutObject(this, KEY);
 	}
 
 	@Override
@@ -46,6 +47,11 @@ public class AnimalManager extends EnemyManager {
 	@Override
 	public int getNumOfEnemies() {
 		return NUMOFENEMIES;
+	}
+
+	@Override
+	public void Destroy() {
+		GameObjectManager.DeleteObject(KEY);
 	}
 
 	private class Animal extends Enemy {

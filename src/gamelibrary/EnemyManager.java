@@ -75,4 +75,7 @@ public abstract class EnemyManager extends GameObject {
 	public abstract int getRegenTime();
 
 	public abstract int getNumOfEnemies();
+
+	@Override
+	public abstract void Destroy();
 }
