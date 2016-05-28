@@ -10,7 +10,7 @@ import java.awt.*;
  * Created by jiny1 on 5/16/2016.
  */
 public class ScoreBoard extends TextBox {
-	public int _score = 0;
+	private int _score = 0;
 
 	public ScoreBoard() {
 		super(10, 10, 200, 70);
@@ -22,5 +22,11 @@ public class ScoreBoard extends TextBox {
 
 	public void Update() {
 		text = String.format("Colorized Enemies : %d\nFPS : %.2f", _score, 1/Time.getTime().getDeltaTime());
+	}
+
+	public void GainPoint(){
+		if (++_score > 30) {
+			// TODO : Change Stage
+		}
 	}
 }

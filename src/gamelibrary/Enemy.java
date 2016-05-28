@@ -64,7 +64,7 @@ public abstract class Enemy extends GameObject implements Collider {
 
 	protected void Colorize() {
 		_isColored = true;
-		GameObjectManager.getScoreBoard()._score++;
+		GameObjectManager.getScoreBoard().GainPoint();
 	}
 
 	@Override
