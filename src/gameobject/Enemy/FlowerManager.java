@@ -17,10 +17,14 @@ public class FlowerManager extends EnemyManager {
 	}
 
 	@Override
-	public void Awake() {
-		GameObjectManager.getImageResourceManager().LoadImage("Images/flower.png", "flower");
-		GameObjectManager.getImageResourceManager().LoadImage("Images/monoflower.png", "monoflower");
+	protected void InitEnemyImages() {
+		GameObjectManager.getImageResourceManager().LoadImage("Images/bullet.png", "bullet");
+		GameObjectManager.getImageResourceManager().LoadImage("Images/flowers/flower_red.png", "flower_red");
+		GameObjectManager.getImageResourceManager().LoadImage("Images/flowers/flower_red_m.png", "flower_red_m");
+	}
 
+	@Override
+	public void Awake() {
 		super.Awake();
 	}
 
@@ -44,13 +48,13 @@ public class FlowerManager extends EnemyManager {
 		@Override
 		public void Init() {
 			super.Init();
-			image = GameObjectManager.getImageResourceManager().GetImage("monoflower");
+			image = GameObjectManager.getImageResourceManager().GetImage("flower_red_m");
 		}
 
 		@Override
 		public void Colorize() {
 			super.Colorize();
-			image = GameObjectManager.getImageResourceManager().GetImage("flower");
+			image = GameObjectManager.getImageResourceManager().GetImage("flower_red");
 		}
 	}
 }

@@ -10,7 +10,7 @@ public class EnemyRifle extends Weapon {
 	private final double COOLTIME = 0.5;
 	private GameObject _enemy;
 
-	EnemyRifle(Enemy enemy) {
+	public EnemyRifle(Enemy enemy) {
 		_enemy = enemy;
 	}
 

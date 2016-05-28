@@ -29,8 +29,12 @@ public abstract class EnemyManager extends GameObject {
 		_timeLeft = _regenTime;
 	}
 
+	protected abstract void InitEnemyImages();
+
 	@Override
 	public void Awake() {
+		InitEnemyImages();
+
 		_regenTime = getRegenTime();
 		_numOfEnemies = getNumOfEnemies();
 		_settings = GameObjectManager.getGameFrameSettings();

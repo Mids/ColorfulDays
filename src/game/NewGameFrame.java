@@ -4,6 +4,7 @@ import gamelibrary.EnemyManager;
 import gamelibrary.GameObjectManager;
 import gamelibrary.Time;
 import gameobject.enemy.AnimalManager;
+import gameobject.enemy.FlowerManager;
 import gameobject.ui.BackGround;
 import gameobject.player.Player;
 import gameobject.ui.ScoreBoard;
@@ -43,7 +44,7 @@ public class NewGameFrame extends GameFrame {
 		backGround = new BackGround();
 		scoreBoard = new ScoreBoard();
 		player = new Player();
-		enemyManager = new AnimalManager();
+		enemyManager = new FlowerManager();
 
 		viewport.children.add(scoreBoard);
 

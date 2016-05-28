@@ -10,8 +10,10 @@ import static java.lang.Math.PI;
  * Created by Jin on 2016-05-16.
  */
 public class AnimalManager extends EnemyManager {
-	private final int REGENTIME = 20;
+	private final int REGENTIME = 40;
 	private final int NUMOFENEMIES = 20;
+
+	private Random rand;
 
 	@Override
 	public void Start() {
@@ -20,10 +22,15 @@ public class AnimalManager extends EnemyManager {
 
 	@Override
 	public void Awake() {
-		GameObjectManager.getImageResourceManager().LoadImage("Images/flower.png", "flower");
-		GameObjectManager.getImageResourceManager().LoadImage("Images/monoflower.png", "monoflower");
-		GameObjectManager.getImageResourceManager().LoadImage("Images/bullet.png", "bullet");
+		rand = new Random();
 		super.Awake();
+	}
+
+	@Override
+	protected void InitEnemyImages() {
+		GameObjectManager.getImageResourceManager().LoadImage("Images/bullet.png", "bullet");
+		GameObjectManager.getImageResourceManager().LoadImage("Images/flowers/flower_blue.png", "flower_blue");
+		GameObjectManager.getImageResourceManager().LoadImage("Images/flowers/flower_blue_m.png", "flower_blue_m");
 	}
 
 	@Override
@@ -44,21 +51,12 @@ public class AnimalManager extends EnemyManager {
 	private class Animal extends Enemy {
 		private Vector3 _speed = new Vector3(300, 0, 0);
 		private double randStart;
-		private Weapon _weapon;
 
 		@Override
 		public void Init() {
 			super.Init();
-			image = GameObjectManager.getImageResourceManager().GetImage("monoflower");
-			randStart = new Random().nextDouble() * 2 * PI;
-			_weapon = new EnemyRifle(this);
-			_weapon.Awake();
-		}
-
-		@Override
-		public void Update() {
-			super.Update();
-			_weapon.Update();
+			image = GameObjectManager.getImageResourceManager().GetImage("flower_blue_m");
+			randStart = rand.nextDouble() * 2 * PI;
 		}
 
 		@Override
@@ -70,12 +68,7 @@ public class AnimalManager extends EnemyManager {
 		@Override
 		public void Colorize() {
 			super.Colorize();
-			image = GameObjectManager.getImageResourceManager().GetImage("flower");
-		}
-
-		@Override
-		protected void Fire() {
-			_weapon.Fire();
+			image = GameObjectManager.getImageResourceManager().GetImage("flower_blue");
 		}
 	}
 }

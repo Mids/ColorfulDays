@@ -1,5 +1,6 @@
 package gamelibrary;
 
+import gameobject.enemy.EnemyRifle;
 import gameobject.player.Player;
 import gameobject.ui.BackGround;
 
@@ -11,6 +12,7 @@ public abstract class Enemy extends GameObject implements Collider {
 	public boolean _isActive;
 	private double _backgroundSpeed;
 	private Player _player;
+	protected Weapon _weapon;
 
 	public void Init() {
 		_player = (Player) GameObjectManager.GetObject("Player");
@@ -20,6 +22,8 @@ public abstract class Enemy extends GameObject implements Collider {
 		_isColored = false;
 		_isActive = false;
 		_backgroundSpeed = BackGround.SPEED;
+		_weapon = new EnemyRifle(this);
+		_weapon.Awake();
 	}
 
 	protected void Move() {
@@ -42,21 +46,19 @@ public abstract class Enemy extends GameObject implements Collider {
 	}
 
 	protected void CheckCollision() {
-		if (!_isColored) {
-			// Hit by bullet
-			Bullet[] playerBullets = _player.getWeapon().GetBullets();
-			for (Bullet bullet : playerBullets) {
-				if (bullet.HitTest3D(this)) {
-					bullet.Destroy();
-					Colorize();
-					return;
-				}
+		// Hit by bullet
+		Bullet[] playerBullets = _player.getWeapon().GetBullets();
+		for (Bullet bullet : playerBullets) {
+			if (bullet.HitTest3D(this)) {
+				bullet.Destroy();
+				Colorize();
+				return;
 			}
+		}
 
-			// TODO: Hit player
-			if (_player.HitTest3D(this)) {
+		// TODO: Hit player
+		if (_player.HitTest3D(this)) {
 //				System.out.println("Game Over");
-			}
 		}
 	}
 
@@ -68,14 +70,14 @@ public abstract class Enemy extends GameObject implements Collider {
 	@Override
 	public void Update() {
 		Move();
-		CheckCollision();
-		Fire();
+		if (!_isColored) {
+			CheckCollision();
+			Fire();
+		}
+		_weapon.Update();
 	}
 
-	/**
-	 * Not necessary
-	 */
 	protected void Fire() {
-
+		_weapon.Fire();
 	}
 }

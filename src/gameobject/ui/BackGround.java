@@ -12,7 +12,7 @@ import loot.graphics.Viewport;
 public class BackGround extends GameObject {
 	private GameFrameSettings _settings;
 	private Viewport _viewport;
-	public static final int SPEED = -300;
+	public static final int SPEED = -200;
 
 	@Override
 	public void Start() {
