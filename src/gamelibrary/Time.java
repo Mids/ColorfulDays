@@ -26,7 +26,7 @@ public class Time {
         return System.nanoTime() / 1000000000.0;
     }
 
-    public  static Time getTime(){
+    public static Time getTime(){
         if(_instance == null) {
             _instance = new Time();
         }
