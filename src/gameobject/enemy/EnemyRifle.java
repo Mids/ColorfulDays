@@ -2,6 +2,8 @@ package gameobject.enemy;
 
 import gamelibrary.*;
 
+import java.awt.*;
+
 /**
  * Created by Jin on 2016-05-23.
  */
@@ -40,7 +42,8 @@ public class EnemyRifle extends Weapon {
 			pos_y = _canvasHeight;
 			radius_x = 5;
 			radius_y = 5;
-			image = GameObjectManager.getImageResourceManager().GetImage("bullet");
+			GameObjectManager.getImageResourceManager().CreateTempImage(Color.lightGray, "bullet_m");
+			image = GameObjectManager.getImageResourceManager().GetImage("bullet_m");
 		}
 
 		void Move() {

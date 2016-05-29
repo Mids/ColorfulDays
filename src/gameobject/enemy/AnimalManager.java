@@ -29,7 +29,6 @@ public class AnimalManager extends EnemyManager {
 
 	@Override
 	protected void InitEnemyImages() {
-		GameObjectManager.getImageResourceManager().LoadImage("Images/bullet.png", "bullet");
 		GameObjectManager.getImageResourceManager().LoadImage("Images/flowers/flower_blue.png", "flower_blue");
 		GameObjectManager.getImageResourceManager().LoadImage("Images/flowers/flower_blue_m.png", "flower_blue_m");
 	}

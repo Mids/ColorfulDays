@@ -19,7 +19,6 @@ public class FlowerManager extends EnemyManager {
 
 	@Override
 	protected void InitEnemyImages() {
-		GameObjectManager.getImageResourceManager().LoadImage("Images/bullet.png", "bullet");
 		GameObjectManager.getImageResourceManager().LoadImage("Images/flowers/flower_red.png", "flower_red");
 		GameObjectManager.getImageResourceManager().LoadImage("Images/flowers/flower_red_m.png", "flower_red_m");
 	}
