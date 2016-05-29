@@ -9,16 +9,16 @@ import java.util.Random;
  * Created by jiny1 on 5/16/2016.
  */
 public abstract class EnemyManager extends GameObject {
-	private int _regenTime;
+	private float _regenTime;
 	private int _numOfEnemies;
 
 	private GameFrameSettings _settings;
 	private Viewport _viewport;
 	private Enemy[] _enemies;
 	private Random _random;
-	private int _timeLeft;
+	private float _timeLeft;
 	private int offset;
-	private int _destroyCount = -1;
+	private float _destroyCount = -1;
 
 	public void RegenerateEnemy() {
 		_enemies[offset].pos_x = _random.nextInt(_settings.canvas_width - (int) _enemies[offset].radius_x * 2) - _settings.canvas_width / 2 + _enemies[offset].radius_x;
@@ -59,9 +59,10 @@ public abstract class EnemyManager extends GameObject {
 
 	@Override
 	public void Update() {
-		if (--_destroyCount >= 0) {
+		if (_destroyCount > 0) {
+			_destroyCount -= Time.getTime().getDeltaTime();
 			System.out.println("destroy count : " + _destroyCount);
-			if (_destroyCount == 0) {
+			if (_destroyCount <= 0) {
 				GameObjectManager.DeleteObject("EnemyManager");
 				for (int i = 0; i < _numOfEnemies; i++) {
 					_viewport.children.remove(_enemies[i]);
@@ -73,7 +74,7 @@ public abstract class EnemyManager extends GameObject {
 				return;
 			}
 		} else if (_timeLeft > 0)
-			--_timeLeft;
+			_timeLeft -= Time.getTime().getDeltaTime();
 		else {
 			RegenerateEnemy();
 			_timeLeft = _regenTime;
@@ -92,12 +93,12 @@ public abstract class EnemyManager extends GameObject {
 
 	protected abstract Enemy getEnemyInstance();
 
-	public abstract int getRegenTime();
+	public abstract float getRegenTime();
 
 	public abstract int getNumOfEnemies();
 
 	@Override
 	public void Destroy() {
-		_destroyCount = 250;
+		_destroyCount = 5;
 	}
 }

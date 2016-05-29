@@ -10,7 +10,7 @@ import static java.lang.Math.PI;
  * Created by Jin on 2016-05-16.
  */
 public class AnimalManager extends EnemyManager {
-	private final int REGENTIME = 40;
+	private final float REGENTIME = 0.6f;
 	private final int NUMOFENEMIES = 20;
 
 	private Random rand;
@@ -33,7 +33,7 @@ public class AnimalManager extends EnemyManager {
 	}
 
 	@Override
-	public int getRegenTime() {
+	public float getRegenTime() {
 		return REGENTIME;
 	}
 
