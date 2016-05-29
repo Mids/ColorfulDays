@@ -18,6 +18,7 @@ public abstract class EnemyManager extends GameObject {
 	private Random _random;
 	private int _timeLeft;
 	private int offset;
+	private int _destroyCount = -1;
 
 	public void RegenerateEnemy() {
 		_enemies[offset].pos_x = _random.nextInt(_settings.canvas_width - (int) _enemies[offset].radius_x * 2) - _settings.canvas_width / 2 + _enemies[offset].radius_x;
@@ -25,11 +26,14 @@ public abstract class EnemyManager extends GameObject {
 		_enemies[offset]._isActive = true;
 
 		if (++offset >= _numOfEnemies) offset = 0;
-
-		_timeLeft = _regenTime;
 	}
 
 	protected abstract void InitEnemyImages();
+
+	@Override
+	public void Start() {
+		GameObjectManager.PutObject(this, "EnemyManager");
+	}
 
 	@Override
 	public void Awake() {
@@ -50,16 +54,32 @@ public abstract class EnemyManager extends GameObject {
 			_enemies[i] = enemy;
 		}
 
+		GameObjectManager.getScoreBoard().ResetPoint();
 	}
 
 	@Override
 	public void Update() {
-		if (_timeLeft > 0)
+		if (--_destroyCount >= 0) {
+			System.out.println("destroy count : " + _destroyCount);
+			if (_destroyCount == 0) {
+				GameObjectManager.DeleteObject("EnemyManager");
+				for (int i = 0; i < _numOfEnemies; i++) {
+					_viewport.children.remove(_enemies[i]);
+					_enemies[i] = null;
+				}
+				_enemies = null;
+
+				GameObjectManager.NextStage();
+				return;
+			}
+		} else if (_timeLeft > 0)
 			--_timeLeft;
 		else {
 			RegenerateEnemy();
+			_timeLeft = _regenTime;
 		}
 
+		// Move Enemies
 		for (Enemy enemy : _enemies) {
 			if (enemy._isActive) {
 				if (enemy.pos_y > -_settings.canvas_height / 2 - 50)
@@ -77,5 +97,7 @@ public abstract class EnemyManager extends GameObject {
 	public abstract int getNumOfEnemies();
 
 	@Override
-	public abstract void Destroy();
+	public void Destroy() {
+		_destroyCount = 250;
+	}
 }

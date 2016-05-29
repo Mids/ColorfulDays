@@ -1,5 +1,7 @@
 package gamelibrary;
 
+import gameobject.enemy.AnimalManager;
+import gameobject.enemy.FlowerManager;
 import gameobject.ui.ScoreBoard;
 import loot.GameFrameSettings;
 import loot.ImageResourceManager;
@@ -10,12 +12,16 @@ import java.util.HashMap;
 import java.util.Map;
 
 public final class GameObjectManager {
+	public static String _deleteKey;
 	private static Map<String, GameObject> GameObjectMap = new HashMap<>();
 	private static ImageResourceManager imageResourceManager;
 	private static InputManager inputManager;
 	private static Viewport viewport;
 	private static GameFrameSettings gameFrameSettings;
 	private static ScoreBoard scoreBoard;
+	private static boolean _next = false;
+	private static int _stage = 0;
+	private static Class<? extends EnemyManager>[] _managers = new Class[]{AnimalManager.class, FlowerManager.class};
 
 	public static ImageResourceManager getImageResourceManager() {
 		return imageResourceManager;
@@ -34,7 +40,7 @@ public final class GameObjectManager {
 	}
 
 	public static void DeleteObject(String key) {
-		GameObjectMap.remove(key);
+		_deleteKey = key;
 	}
 
 	public static InputManager getInputManager() {
@@ -54,6 +60,16 @@ public final class GameObjectManager {
 	}
 
 	public static void Update() {
+		if (_next && _stage < 2) {
+			try {
+				_managers[_stage++].newInstance().Awake();
+			} catch (InstantiationException e) {
+				e.printStackTrace();
+			} catch (IllegalAccessException e) {
+				e.printStackTrace();
+			}
+			_next = false;
+		}
 		for (Map.Entry<String, GameObject> entry : GameObjectMap.entrySet()) {
 			entry.getValue().Update();
 		}
@@ -80,5 +96,9 @@ public final class GameObjectManager {
 
 	public static void setScoreBoard(ScoreBoard scoreBoard) {
 		GameObjectManager.scoreBoard = scoreBoard;
+	}
+
+	public static void NextStage() {
+		_next = true;
 	}
 }

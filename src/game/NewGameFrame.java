@@ -3,10 +3,9 @@ package game;
 import gamelibrary.EnemyManager;
 import gamelibrary.GameObjectManager;
 import gamelibrary.Time;
-import gameobject.enemy.AnimalManager;
 import gameobject.enemy.FlowerManager;
-import gameobject.ui.BackGround;
 import gameobject.player.Player;
+import gameobject.ui.BackGround;
 import gameobject.ui.ScoreBoard;
 import loot.GameFrame;
 import loot.GameFrameSettings;
@@ -17,7 +16,6 @@ import java.awt.event.MouseEvent;
 
 @SuppressWarnings("serial")
 public class NewGameFrame extends GameFrame {
-
 	ScoreBoard scoreBoard; // TextBox까지 입력하고 Ctrl + Space를 눌러 import 구문 자동 추가
 	Viewport viewport;
 	Player player;

@@ -11,6 +11,7 @@ import java.awt.*;
  */
 public class ScoreBoard extends TextBox {
 	private int _score = 0;
+	private int _scoreToGoNext = 10;
 
 	public ScoreBoard() {
 		super(10, 10, 200, 70);
@@ -21,12 +22,26 @@ public class ScoreBoard extends TextBox {
 	}
 
 	public void Update() {
-		text = String.format("Colorized Enemies : %d\nFPS : %.2f", _score, 1/Time.getTime().getDeltaTime());
+		text = String.format("Colorized Enemies : %d\nFPS : %.2f", _score, 1 / Time.getTime().getDeltaTime());
 	}
 
-	public void GainPoint(){
-		if (++_score > 30) {
+	public void GainPoint() {
+		if (++_score == _scoreToGoNext) {
 			// TODO : Change Stage
+			GameObjectManager.GetObject("EnemyManager").Destroy();
 		}
+		float backgroundAlpha = (_scoreToGoNext - (float) _score % _scoreToGoNext) / _scoreToGoNext;
+		if (_score >= _scoreToGoNext) {
+			backgroundAlpha = 0;
+		}
+
+		// Colorize background
+		((BackGround) GameObjectManager.GetObject("Background")).Colorize(backgroundAlpha);
+	}
+
+	public void ResetPoint() {
+		_score = 0;
+		// Colorize background
+		((BackGround) GameObjectManager.GetObject("Background")).Colorize(1);
 	}
 }
