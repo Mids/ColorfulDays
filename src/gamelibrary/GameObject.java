@@ -5,6 +5,8 @@ import loot.graphics.DrawableObject3D;
 import java.awt.*;
 
 public abstract class GameObject extends DrawableObject3D {
+	public float alpha = 1.0f;
+
 	public GameObject() {
 		super();
 		// TODO Auto-generated constructor stub
@@ -97,5 +99,11 @@ public abstract class GameObject extends DrawableObject3D {
 		return pos_x - radius_x <= other.pos_x + other.radius_x && pos_x + radius_x >= other.pos_x - other.radius_x &&
 				pos_y - radius_y <= other.pos_y + other.radius_y && pos_y + radius_y >= other.pos_y - other.radius_y &&
 				Double.valueOf(pos_z).equals(other.pos_z);
+	}
+
+	@Override
+	public void Draw(Graphics2D g) {
+		g.setComposite(AlphaComposite.getInstance(AlphaComposite.SRC_OVER, alpha));
+		super.Draw(g);
 	}
 }
