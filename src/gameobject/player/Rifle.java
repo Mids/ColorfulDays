@@ -2,6 +2,9 @@ package gameobject.player;
 
 import gamelibrary.*;
 
+import java.awt.*;
+import java.util.Random;
+
 /**
  * Created by jiny1 on 5/16/2016.
  */
@@ -21,7 +24,9 @@ public class Rifle extends Weapon {
 
 	@Override
 	public void Awake() {
-		GameObjectManager.getImageResourceManager().LoadImage("Images/bullet.png", "bullet");
+		GameObjectManager.getImageResourceManager().CreateTempImage(Color.RED, "bullet_r");
+		GameObjectManager.getImageResourceManager().CreateTempImage(Color.GREEN, "bullet_g");
+		GameObjectManager.getImageResourceManager().CreateTempImage(Color.BLUE, "bullet_b");
 		super.Awake();
 	}
 
@@ -41,14 +46,14 @@ public class Rifle extends Weapon {
 
 		private int _canvasHeight;
 		private GameObject _player;
+		private Random _rand = new Random();
 
 		RifleBullet() {
 			_player = GameObjectManager.GetObject("Player");
 			_canvasHeight = GameObjectManager.getGameFrameSettings().canvas_height;
-			pos_y = _canvasHeight;
 			radius_x = 5;
 			radius_y = 5;
-			image = GameObjectManager.getImageResourceManager().GetImage("bullet");
+			Init();
 		}
 
 		void Move() {
@@ -67,8 +72,7 @@ public class Rifle extends Weapon {
 
 		@Override
 		public void Destroy() {
-			_isActive = false;
-			pos_y = _canvasHeight;
+			Init();
 		}
 
 		@Override
@@ -76,6 +80,22 @@ public class Rifle extends Weapon {
 			pos_x = _player.pos_x;
 			pos_y = _player.pos_y + _player.radius_y / 2;
 			_isActive = true;
+		}
+		
+		private void Init() {
+			_isActive = false;
+			pos_y = _canvasHeight;
+			switch (_rand.nextInt(3)) {
+				case 0:
+					image = GameObjectManager.getImageResourceManager().GetImage("bullet_r");
+					break;
+				case 1:
+					image = GameObjectManager.getImageResourceManager().GetImage("bullet_g");
+					break;
+				case 2:
+					image = GameObjectManager.getImageResourceManager().GetImage("bullet_b");
+					break;
+			}
 		}
 	}
 }
