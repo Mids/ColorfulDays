@@ -42,6 +42,11 @@ public class AnimalManager extends EnemyManager {
 		return NUMOFENEMIES;
 	}
 
+	@Override
+	public String getNextStage() {
+		return "Stage 3";
+	}
+
 	private class Animal extends Enemy {
 		private Vector3 _speed = new Vector3(300, 0, 0);
 		private double randStart;

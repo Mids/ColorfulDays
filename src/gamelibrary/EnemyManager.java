@@ -11,6 +11,7 @@ import java.util.Random;
 public abstract class EnemyManager extends GameObject {
 	private float _regenTime;
 	private int _numOfEnemies;
+	private float _waitingTime = 4;
 
 	private GameFrameSettings _settings;
 	private Viewport _viewport;
@@ -19,6 +20,8 @@ public abstract class EnemyManager extends GameObject {
 	private float _timeLeft;
 	private int offset;
 	private float _destroyCount = -1;
+
+	private boolean _isStageRevealed = false;
 
 	public void RegenerateEnemy() {
 		_enemies[offset].pos_x = _random.nextInt(_settings.canvas_width - (int) _enemies[offset].radius_x * 2) - _settings.canvas_width / 2 + _enemies[offset].radius_x;
@@ -59,9 +62,20 @@ public abstract class EnemyManager extends GameObject {
 
 	@Override
 	public void Update() {
+		if (_waitingTime > 0) {
+			_waitingTime -= Time.getTime().getDeltaTime();
+			return;
+		}
+
 		if (_destroyCount > 0) {
 			_destroyCount -= Time.getTime().getDeltaTime();
 			System.out.println("destroy count : " + _destroyCount);
+
+			if (!_isStageRevealed && _destroyCount < 3) {
+				GameObjectManager.getStageNumber().Reveal(getNextStage());
+				_isStageRevealed = true;
+			}
+
 			if (_destroyCount <= 0) {
 				GameObjectManager.DeleteObject("EnemyManager");
 				for (int i = 0; i < _numOfEnemies; i++) {
@@ -97,8 +111,10 @@ public abstract class EnemyManager extends GameObject {
 
 	public abstract int getNumOfEnemies();
 
+	public abstract String getNextStage();
+
 	@Override
 	public void Destroy() {
-		_destroyCount = 5;
+		_destroyCount = 8;
 	}
 }

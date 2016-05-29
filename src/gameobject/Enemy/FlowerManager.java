@@ -32,6 +32,11 @@ public class FlowerManager extends EnemyManager {
 		return NUMOFENEMIES;
 	}
 
+	@Override
+	public String getNextStage() {
+		return "Stage 2";
+	}
+
 	// Flower
 	private class Flower extends Enemy {
 		@Override

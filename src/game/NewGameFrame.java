@@ -7,6 +7,7 @@ import gameobject.enemy.FlowerManager;
 import gameobject.player.Player;
 import gameobject.ui.BackGround;
 import gameobject.ui.ScoreBoard;
+import gameobject.ui.StageNumber;
 import loot.GameFrame;
 import loot.GameFrameSettings;
 import loot.graphics.Viewport;
@@ -21,6 +22,7 @@ public class NewGameFrame extends GameFrame {
 	Player player;
 	EnemyManager enemyManager;
 	BackGround backGround;
+	StageNumber stageNumber;
 
 	public NewGameFrame(GameFrameSettings settings) {
 		super(settings);
@@ -41,9 +43,11 @@ public class NewGameFrame extends GameFrame {
 		// Create initial objects
 		backGround = new BackGround();
 		scoreBoard = new ScoreBoard();
+		stageNumber = new StageNumber();
 		player = new Player();
 		enemyManager = new FlowerManager();
 
+		viewport.children.add(stageNumber);
 		viewport.children.add(scoreBoard);
 
 		// '카메라' 설정 부분

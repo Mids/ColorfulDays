@@ -3,6 +3,7 @@ package gamelibrary;
 import gameobject.enemy.AnimalManager;
 import gameobject.enemy.FlowerManager;
 import gameobject.ui.ScoreBoard;
+import gameobject.ui.StageNumber;
 import loot.GameFrameSettings;
 import loot.ImageResourceManager;
 import loot.InputManager;
@@ -19,6 +20,7 @@ public final class GameObjectManager {
 	private static Viewport viewport;
 	private static GameFrameSettings gameFrameSettings;
 	private static ScoreBoard scoreBoard;
+	private static StageNumber _stageNumber;
 	private static boolean _next = false;
 	private static int _stage = 0;
 	private static Class<? extends EnemyManager>[] _managers = new Class[]{AnimalManager.class, FlowerManager.class};
@@ -74,6 +76,7 @@ public final class GameObjectManager {
 			entry.getValue().Update();
 		}
 		scoreBoard.Update();
+		_stageNumber.Update();
 	}
 
 	public static void Awake() {
@@ -96,6 +99,14 @@ public final class GameObjectManager {
 
 	public static void setScoreBoard(ScoreBoard scoreBoard) {
 		GameObjectManager.scoreBoard = scoreBoard;
+	}
+
+	public static StageNumber getStageNumber() {
+		return _stageNumber;
+	}
+
+	public static void setStageNumber(StageNumber stageNumber) {
+		_stageNumber = stageNumber;
 	}
 
 	public static void NextStage() {
