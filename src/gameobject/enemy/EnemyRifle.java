@@ -10,7 +10,7 @@ import java.awt.*;
 public class EnemyRifle extends Weapon {
 	private final int NUMBEROFBULLETS = 20;
 	private final double COOLTIME = 0.5;
-	private GameObject _enemy;
+	protected GameObject _enemy;
 
 	public EnemyRifle(Enemy enemy) {
 		_enemy = enemy;
@@ -31,8 +31,7 @@ public class EnemyRifle extends Weapon {
 		return COOLTIME;
 	}
 
-	private class EnemyRifleBullet extends EnemyBullet {
-		private Vector3 _speed = new Vector3(0, -600, 0);
+	public class EnemyRifleBullet extends EnemyBullet {
 
 		private int _canvasHeight;
 
@@ -44,10 +43,6 @@ public class EnemyRifle extends Weapon {
 			radius_y = 5;
 			GameObjectManager.getImageResourceManager().CreateTempImage(Color.lightGray, "bullet_m");
 			image = GameObjectManager.getImageResourceManager().GetImage("bullet_m");
-		}
-
-		void Move() {
-			pos_y += Time.getTime().getDeltaTime() * _speed.y;
 		}
 
 		@Override

@@ -6,8 +6,9 @@ import gameobject.player.Player;
  * Created by Jin on 2016-05-23.
  */
 public abstract class EnemyBullet extends Bullet {
+	protected Vector3 _speed = new Vector3(0, -600, 0);
 	protected boolean _isActive;
-	private Player _player;
+	protected Player _player;
 
 	protected EnemyBullet() {
 		_player = (Player) GameObjectManager.GetObject("Player");
@@ -49,5 +50,10 @@ public abstract class EnemyBullet extends Bullet {
 	@Override
 	public void Destroy() {
 		Init();
+	}
+
+	protected void Move() {
+		pos_x +=Time.getTime().getDeltaTime() * _speed.x;
+		pos_y += Time.getTime().getDeltaTime() * _speed.y;
 	}
 }

@@ -10,9 +10,9 @@ import gameobject.ui.BackGround;
 public abstract class Enemy extends GameObject implements Collider {
 	public boolean _isColored;
 	public boolean _isActive;
+	protected Weapon _weapon;
 	private double _backgroundSpeed;
 	private Player _player;
-	protected Weapon _weapon;
 
 	public void Init() {
 		_player = (Player) GameObjectManager.GetObject("Player");
@@ -22,7 +22,7 @@ public abstract class Enemy extends GameObject implements Collider {
 		_isColored = false;
 		_isActive = false;
 		_backgroundSpeed = BackGround.SPEED;
-		_weapon = new EnemyRifle(this);
+		if (_weapon == null) _weapon = getRifle();
 		_weapon.Awake();
 	}
 
@@ -79,5 +79,9 @@ public abstract class Enemy extends GameObject implements Collider {
 
 	protected void Fire() {
 		_weapon.Fire();
+	}
+
+	protected EnemyRifle getRifle() {
+		return new EnemyRifle(this);
 	}
 }

@@ -69,7 +69,6 @@ public abstract class EnemyManager extends GameObject {
 
 		if (_destroyCount > 0) {
 			_destroyCount -= Time.getTime().getDeltaTime();
-			System.out.println("destroy count : " + _destroyCount);
 
 			if (!_isStageRevealed && _destroyCount < 3) {
 				GameObjectManager.getStageNumber().Reveal(getNextStage());

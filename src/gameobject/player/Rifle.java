@@ -82,7 +82,8 @@ public class Rifle extends Weapon {
 			_isActive = true;
 		}
 		
-		private void Init() {
+		@Override
+		public void Init() {
 			_isActive = false;
 			pos_y = _canvasHeight;
 			switch (_rand.nextInt(3)) {

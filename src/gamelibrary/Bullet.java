@@ -5,4 +5,7 @@ package gamelibrary;
  */
 public abstract class Bullet extends GameObject implements Collider {
 	public abstract void Fire();
+
+	public void Init() {
+	}
 }

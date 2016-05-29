@@ -22,16 +22,29 @@ public abstract class Weapon extends GameObject {
 		_viewport = GameObjectManager.getViewport();
 		_coolTime = getCoolTime();
 		_numOfBullets = getNumOfBullets();
-		InitBullets();
-
+		Init();
 	}
 
-	protected void InitBullets() {
+	protected void CreateBullets() {
 		_bullets = new Bullet[_numOfBullets];
 		for (int i = 0; i < _numOfBullets; i++) {
 			Bullet bullet = getBullet();
 			_viewport.children.add(bullet);
 			_bullets[i] = bullet;
+		}
+	}
+
+	public void Init(){
+		if (_bullets == null) {
+			CreateBullets();
+		}else {
+			InitBullets();
+		}
+	}
+
+	protected void InitBullets() {
+		for (int i = 0; i < _numOfBullets; i++) {
+			_bullets[i].Init();
 		}
 	}
 
