@@ -13,7 +13,6 @@ public class BackGround extends GameObject {
 	public static final int SPEED = -200;
 	protected GameFrameSettings _settings;
 	protected Viewport _viewport;
-	private boolean _isChanging = false;
 	private GameObject _monoBackground;
 
 	@Override
