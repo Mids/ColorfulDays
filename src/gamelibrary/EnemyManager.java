@@ -47,6 +47,7 @@ public abstract class EnemyManager extends GameObject {
 		_settings = GameObjectManager.getGameFrameSettings();
 		_viewport = GameObjectManager.getViewport();
 		_random = new Random();
+		_isActive = false;
 
 		// Init flowers
 		_enemies = new Enemy[_numOfEnemies];

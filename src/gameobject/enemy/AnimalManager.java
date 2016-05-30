@@ -50,18 +50,20 @@ public class AnimalManager extends EnemyManager {
 	private class Animal extends Enemy {
 		private Vector3 _speed = new Vector3(300, 0, 0);
 		private double randStart;
+		private int _canvasHeight;
 
 		@Override
 		public void Init() {
 			super.Init();
 			image = GameObjectManager.getImageResourceManager().GetImage("flower_blue_m");
 			randStart = rand.nextDouble() * 2 * PI;
+			_canvasHeight = GameObjectManager.getGameFrameSettings().canvas_height;
 		}
 
 		@Override
 		public void Move() {
 			super.Move();
-			pos_x += Time.getTime().getDeltaTime() * _speed.x * Math.sin(randStart + 10 * pos_y / GameObjectManager.getGameFrameSettings().canvas_height);
+			pos_x += Time.getTime().getDeltaTime() * _speed.x * Math.sin(randStart + 10 * pos_y / _canvasHeight);
 		}
 
 		@Override

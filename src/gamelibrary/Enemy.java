@@ -9,7 +9,6 @@ import gameobject.ui.BackGround;
  */
 public abstract class Enemy extends GameObject implements Collider {
 	public boolean _isColored;
-	public boolean _isActive;
 	protected Weapon _weapon;
 	private double _backgroundSpeed;
 	private Player _player;
@@ -49,7 +48,7 @@ public abstract class Enemy extends GameObject implements Collider {
 		// Hit by bullet
 		Bullet[] playerBullets = _player.getWeapon().GetBullets();
 		for (Bullet bullet : playerBullets) {
-			if (bullet.HitTest3D(this)) {
+			if (bullet._isActive && bullet.HitTest3D(this)) {
 				bullet.Destroy();
 				Colorize();
 				return;

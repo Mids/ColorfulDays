@@ -47,6 +47,8 @@ public class StageNumber extends TextBox {
 
 	@Override
 	public void Draw(Graphics2D g) {
+		if (alpha == 0) return;
+
 		g.setComposite(AlphaComposite.getInstance(AlphaComposite.SRC_OVER, alpha));
 		super.Draw(g);
 	}

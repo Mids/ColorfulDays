@@ -22,6 +22,7 @@ public abstract class Weapon extends GameObject {
 		_viewport = GameObjectManager.getViewport();
 		_coolTime = getCoolTime();
 		_numOfBullets = getNumOfBullets();
+		_isActive = false;
 		Init();
 	}
 

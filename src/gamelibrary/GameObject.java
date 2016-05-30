@@ -5,6 +5,7 @@ import loot.graphics.DrawableObject3D;
 import java.awt.*;
 
 public abstract class GameObject extends DrawableObject3D {
+	protected boolean _isActive = true;
 	public float alpha = 1.0f;
 
 	public GameObject() {
@@ -103,6 +104,8 @@ public abstract class GameObject extends DrawableObject3D {
 
 	@Override
 	public void Draw(Graphics2D g) {
+		if (!_isActive || alpha == 0) return;
+
 		g.setComposite(AlphaComposite.getInstance(AlphaComposite.SRC_OVER, alpha));
 		super.Draw(g);
 	}

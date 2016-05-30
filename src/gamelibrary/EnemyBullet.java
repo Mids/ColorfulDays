@@ -7,7 +7,6 @@ import gameobject.player.Player;
  */
 public abstract class EnemyBullet extends Bullet {
 	protected Vector3 _speed = new Vector3(0, -600, 0);
-	protected boolean _isActive;
 	protected Player _player;
 
 	protected EnemyBullet() {
@@ -29,7 +28,7 @@ public abstract class EnemyBullet extends Bullet {
 			// Hit by bullet
 			Bullet[] playerBullets = _player.getWeapon().GetBullets();
 			for (Bullet bullet : playerBullets) {
-				if (bullet.HitTest3D(this)) {
+				if (bullet._isActive && bullet.HitTest3D(this)) {
 					bullet.Destroy();
 					Destroy();
 					return;

@@ -41,7 +41,6 @@ public class Rifle extends Weapon {
 	}
 
 	private class RifleBullet extends PlayerBullet {
-		public boolean _isActive = false;
 		private Vector3 _speed = new Vector3(0, 600, 0);
 
 		private int _canvasHeight;
