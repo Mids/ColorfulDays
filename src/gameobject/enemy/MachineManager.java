@@ -10,7 +10,7 @@ import static java.lang.Math.PI;
 /**
  * Created by jiny1 on 5/30/2016.
  */
-public class MachinManager extends EnemyManager {
+public class MachineManager extends EnemyManager {
 	private final float REGENTIME = 0.7f;
 	private final int NUMOFENEMIES = 20;
 

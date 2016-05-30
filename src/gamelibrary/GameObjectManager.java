@@ -1,7 +1,7 @@
 package gamelibrary;
 
 import gameobject.enemy.AnimalManager;
-import gameobject.enemy.MachinManager;
+import gameobject.enemy.MachineManager;
 import gameobject.ui.ScoreBoard;
 import gameobject.ui.StageNumber;
 import loot.GameFrameSettings;
@@ -24,7 +24,7 @@ public final class GameObjectManager {
 	private static boolean _next = false;
 	private static int _stage = 0;
 	@SuppressWarnings("unchecked")
-	private static Class<? extends EnemyManager>[] _managers = new Class[]{AnimalManager.class, MachinManager.class};
+	private static Class<? extends EnemyManager>[] _managers = new Class[]{AnimalManager.class, MachineManager.class};
 
 	public static ImageResourceManager getImageResourceManager() {
 		return imageResourceManager;
