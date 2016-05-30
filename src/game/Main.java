@@ -9,6 +9,7 @@ public class Main {
 		/* 여기서 settings. 을 입력하여 게임 화면 관련 설정 가능 */
 		settings.canvas_height = 800;
 		settings.canvas_width = 600;
+		settings.gameLoop_interval_ns = 0;
 
 		NewGameFrame window = new NewGameFrame(settings); // SampleFrame 대신 여러분이 만든 클래스 이름 넣기
 
