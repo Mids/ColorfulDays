@@ -10,8 +10,8 @@ import gameobject.ui.BackGround;
 public abstract class Enemy extends GameObject implements Collider {
 	public boolean _isColored;
 	protected Weapon _weapon;
-	private double _backgroundSpeed;
-	private Player _player;
+	protected double _backgroundSpeed;
+	protected Player _player;
 
 	public void Init() {
 		_player = (Player) GameObjectManager.GetObject("Player");

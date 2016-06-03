@@ -14,11 +14,9 @@ public class MachineManager extends EnemyManager {
 	private final float REGENTIME = 0.7f;
 	private final int NUMOFENEMIES = 20;
 
-	private Random rand;
-
 	@Override
 	public void Awake() {
-		rand = new Random();
+		_random = new Random();
 		super.Awake();
 	}
 
@@ -47,7 +45,7 @@ public class MachineManager extends EnemyManager {
 
 	@Override
 	public String getNextStage() {
-		return "TheEnd";
+		return "Boss";
 	}
 
 	private class Machine extends Enemy {
@@ -59,7 +57,7 @@ public class MachineManager extends EnemyManager {
 		public void Init() {
 			super.Init();
 			image = GameObjectManager.getImageResourceManager().GetImage("machine_m");
-			randStart = rand.nextDouble() * 2 * PI;
+			randStart = _random.nextDouble() * 2 * PI;
 			_canvasHeight = GameObjectManager.getGameFrameSettings().canvas_height;
 		}
 

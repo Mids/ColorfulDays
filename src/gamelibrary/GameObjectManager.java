@@ -1,6 +1,7 @@
 package gamelibrary;
 
 import gameobject.enemy.AnimalManager;
+import gameobject.enemy.BossManager;
 import gameobject.enemy.MachineManager;
 import gameobject.ui.ScoreBoard;
 import gameobject.ui.StageNumber;
@@ -22,9 +23,11 @@ public final class GameObjectManager {
 	private static ScoreBoard scoreBoard;
 	private static StageNumber _stageNumber;
 	private static boolean _next = false;
-	private static int _stage = 0;
+	private static int _currentStage = 0;
+	private static int _totalStage;
+
 	@SuppressWarnings("unchecked")
-	private static Class<? extends EnemyManager>[] _managers = new Class[]{AnimalManager.class, MachineManager.class};
+	private static Class<? extends EnemyManager>[] _managers = new Class[]{AnimalManager.class, MachineManager.class, BossManager.class};
 
 	public static ImageResourceManager getImageResourceManager() {
 		return imageResourceManager;
@@ -63,9 +66,9 @@ public final class GameObjectManager {
 	}
 
 	public static void Update() {
-		if (_next && _stage < 2) {
+		if (_next && _currentStage < _totalStage) {
 			try {
-				_managers[_stage++].newInstance().Awake();
+				_managers[_currentStage++].newInstance().Awake();
 			} catch (InstantiationException e) {
 				e.printStackTrace();
 			} catch (IllegalAccessException e) {
@@ -81,6 +84,7 @@ public final class GameObjectManager {
 	}
 
 	public static void Awake() {
+		_totalStage = _managers.length;
 		for (Map.Entry<String, GameObject> entry : GameObjectMap.entrySet()) {
 			entry.getValue().Awake();
 		}

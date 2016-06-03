@@ -5,7 +5,7 @@ import loot.graphics.DrawableObject3D;
 import java.awt.*;
 
 public abstract class GameObject extends DrawableObject3D {
-	protected boolean _isActive = true;
+	public boolean _isActive = true;
 	public float alpha = 1.0f;
 
 	public GameObject() {

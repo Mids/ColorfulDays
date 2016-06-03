@@ -9,18 +9,16 @@ import java.util.Random;
  * Created by jiny1 on 5/16/2016.
  */
 public abstract class EnemyManager extends GameObject {
+	protected Random _random;
+	protected GameFrameSettings _settings;
+	protected Viewport _viewport;
+	protected float _waitingTime = 4;
 	private float _regenTime;
 	private int _numOfEnemies;
-	private float _waitingTime = 4;
-
-	private GameFrameSettings _settings;
-	private Viewport _viewport;
 	private Enemy[] _enemies;
-	private Random _random;
 	private float _timeLeft;
 	private int offset;
 	private float _destroyCount = -1;
-
 	private boolean _isStageRevealed = false;
 
 	public void RegenerateEnemy() {
