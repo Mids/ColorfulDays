@@ -5,7 +5,6 @@ import gamelibrary.EnemyManager;
 import gamelibrary.GameObjectManager;
 import gamelibrary.Time;
 
-import java.awt.*;
 import java.util.Random;
 
 /**
@@ -13,6 +12,7 @@ import java.util.Random;
  */
 public class BossManager extends EnemyManager {
 	private Boss _boss;
+
 	@Override
 	protected void InitEnemyImages() {
 

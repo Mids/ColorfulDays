@@ -52,7 +52,7 @@ public abstract class EnemyBullet extends Bullet {
 	}
 
 	protected void Move() {
-		pos_x +=Time.getTime().getDeltaTime() * _speed.x;
+		pos_x += Time.getTime().getDeltaTime() * _speed.x;
 		pos_y += Time.getTime().getDeltaTime() * _speed.y;
 	}
 }

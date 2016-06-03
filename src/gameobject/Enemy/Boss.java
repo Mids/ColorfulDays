@@ -12,13 +12,12 @@ import static java.lang.Math.PI;
 /**
  * Created by jiny1 on 6/4/2016.
  */
-public class Boss extends Enemy{
+public class Boss extends Enemy {
+	public ColorBoss _colorBoss;
 	protected Random _random;
 	private Vector3 _speed = new Vector3(300, 0, 0);
 	private double randStart;
 	private int _canvasHeight;
-	public ColorBoss _colorBoss;
-
 	private double _entranceTime = 3;
 	private int _maxLife = 10;
 	private int _currentLife = _maxLife;
@@ -54,9 +53,9 @@ public class Boss extends Enemy{
 
 	@Override
 	protected void Colorize() {
-		if(_currentLife > 0) {
+		if (_currentLife > 0) {
 			_currentLife--;
-			alpha = (float)_currentLife / _maxLife;
+			alpha = (float) _currentLife / _maxLife;
 		} else {
 			super.Colorize();
 		}
