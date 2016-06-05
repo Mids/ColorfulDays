@@ -6,10 +6,10 @@ import loot.graphics.Viewport;
  * Created by jiny1 on 5/16/2016.
  */
 public abstract class Weapon extends GameObject {
+	protected int _numOfBullets;
+	protected Viewport _viewport;
+	protected Bullet[] _bullets;
 	private double _coolTime;
-	private int _numOfBullets;
-	private Viewport _viewport;
-	private Bullet[] _bullets;
 	private double _coolDown;
 	private int offset = 0;
 
@@ -36,7 +36,7 @@ public abstract class Weapon extends GameObject {
 		}
 	}
 
-	public void Init(){
+	public void Init() {
 		if (_bullets == null) {
 			CreateBullets();
 		} else {

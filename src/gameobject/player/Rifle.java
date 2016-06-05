@@ -41,8 +41,6 @@ public class Rifle extends Weapon {
 	}
 
 	private class RifleBullet extends PlayerBullet {
-		private Vector3 _speed = new Vector3(0, 600, 0);
-
 		private int _canvasHeight;
 		private GameObject _player;
 		private Random _rand = new Random();
@@ -52,6 +50,7 @@ public class Rifle extends Weapon {
 			_canvasHeight = GameObjectManager.getGameFrameSettings().canvas_height;
 			radius_x = 5;
 			radius_y = 5;
+			_speed = new Vector3(0, 600, 0);
 			Init();
 		}
 
@@ -80,7 +79,7 @@ public class Rifle extends Weapon {
 			pos_y = _player.pos_y + _player.radius_y / 2;
 			_isActive = true;
 		}
-		
+
 		@Override
 		public void Init() {
 			_isActive = false;

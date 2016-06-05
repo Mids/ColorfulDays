@@ -33,27 +33,13 @@ public class EnemyRifle extends Weapon {
 
 	public class EnemyRifleBullet extends EnemyBullet {
 
-		private int _canvasHeight;
-
 		EnemyRifleBullet() {
 			super();
-			_canvasHeight = GameObjectManager.getGameFrameSettings().canvas_height;
 			pos_y = _canvasHeight;
 			radius_x = 5;
 			radius_y = 5;
 			GameObjectManager.getImageResourceManager().CreateTempImage(Color.lightGray, "bullet_m");
 			image = GameObjectManager.getImageResourceManager().GetImage("bullet_m");
-		}
-
-		@Override
-		public void Update() {
-			if (_isActive) {
-				if (pos_y < _canvasHeight / 2 + 5) {
-					Move();
-					CheckCollision();
-				} else
-					Destroy();
-			}
 		}
 
 		@Override

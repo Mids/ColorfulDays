@@ -6,11 +6,13 @@ import gameobject.player.Player;
  * Created by Jin on 2016-05-23.
  */
 public abstract class EnemyBullet extends Bullet {
-	protected Vector3 _speed = new Vector3(0, -600, 0);
+	protected int _canvasHeight;
 	protected Player _player;
 
 	protected EnemyBullet() {
 		_player = (Player) GameObjectManager.GetObject("Player");
+		_canvasHeight = GameObjectManager.getGameFrameSettings().canvas_height;
+		_speed = new Vector3(0, -600, 0);
 	}
 
 	@Override
@@ -39,6 +41,17 @@ public abstract class EnemyBullet extends Bullet {
 			if (_player.HitTest3D(this)) {
 //				System.out.println("Game Over!!");
 			}
+		}
+	}
+
+	@Override
+	public void Update() {
+		if (_isActive) {
+			if (pos_y < _canvasHeight / 2 + 5) {
+				Move();
+				CheckCollision();
+			} else
+				Destroy();
 		}
 	}
 

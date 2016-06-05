@@ -22,6 +22,10 @@ public class Boss extends Enemy {
 	private int _maxLife = 10;
 	private int _currentLife = _maxLife;
 
+	private double _coolTime = 2;
+	private double _coolDown = _coolTime;
+	private Weapon[] _weapons = {new BossCirclePattern(this)};
+
 	@Override
 	public void Init() {
 		_player = (Player) GameObjectManager.GetObject("Player");
@@ -31,8 +35,9 @@ public class Boss extends Enemy {
 		_isColored = false;
 		_isActive = true;
 		_backgroundSpeed = BackGround.SPEED;
-		if (_weapon == null) _weapon = getRifle();
-		_weapon.Awake();
+		for (Weapon weapon : _weapons) {
+			weapon.Awake();
+		}
 		GameObjectManager.getImageResourceManager().CreateTempImage(Color.lightGray, "boss");
 		image = GameObjectManager.getImageResourceManager().GetImage("boss");
 		_random = new Random();
@@ -40,15 +45,6 @@ public class Boss extends Enemy {
 		_canvasHeight = GameObjectManager.getGameFrameSettings().canvas_height;
 
 		_colorBoss = new ColorBoss(this);
-	}
-
-	@Override
-	protected void Move() {
-		System.out.println("move");
-		if (_entranceTime > 0) {
-			pos_y += Time.getTime().getDeltaTime() * _backgroundSpeed;
-			_entranceTime -= Time.getTime().getDeltaTime();
-		}
 	}
 
 	@Override
@@ -62,14 +58,32 @@ public class Boss extends Enemy {
 	}
 
 	@Override
-	protected EnemyRifle getRifle() {
-		return super.getRifle();
+	public void Update() {
+		if (_entranceTime > 0) {
+			Move();
+			_entranceTime -= Time.getTime().getDeltaTime();
+		}
+
+		if (!_isColored) {
+			CheckCollision();
+			Fire();
+		}
+
+		for (Weapon weapon : _weapons) {
+			weapon.Update();
+		}
+
+		_colorBoss.Follow();
 	}
 
 	@Override
-	public void Update() {
-		super.Update();
-		_colorBoss.Follow();
+	protected void Fire() {
+		if (_coolDown > 0) {
+			_coolDown -= Time.getTime().getDeltaTime();
+			return;
+		}
+		_coolDown = _coolTime;
+		_weapons[_random.nextInt(_weapons.length)].Fire();
 	}
 
 	class ColorBoss extends GameObject {

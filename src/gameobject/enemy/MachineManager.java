@@ -73,7 +73,8 @@ public class MachineManager extends EnemyManager {
 			image = GameObjectManager.getImageResourceManager().GetImage("machine");
 		}
 
-		protected EnemyRifle getRifle() {
+		@Override
+		protected Weapon getRifle() {
 			return new EnemyGuidedRifle(this);
 		}
 	}

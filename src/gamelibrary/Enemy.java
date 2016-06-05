@@ -80,7 +80,7 @@ public abstract class Enemy extends GameObject implements Collider {
 		_weapon.Fire();
 	}
 
-	protected EnemyRifle getRifle() {
+	protected Weapon getRifle() {
 		return new EnemyRifle(this);
 	}
 }
