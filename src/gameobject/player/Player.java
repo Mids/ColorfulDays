@@ -18,6 +18,13 @@ public class Player extends GameObject implements Collider {
 	private ButtonState _upButton;
 	private ButtonState _downButton;
 	private Weapon _weapon;
+	private MonoPlayer _monoPlayer;
+
+	private double _maxLife = 100;
+	private double _currentLife = _maxLife;
+	private double _hitCount = 0;
+	private double _hitTime = 2;
+	private double _regen = 20;
 
 	public Weapon getWeapon() {
 		return _weapon;
@@ -33,6 +40,7 @@ public class Player extends GameObject implements Collider {
 	public void Awake() {
 		_settings = GameObjectManager.getGameFrameSettings();
 		GameObjectManager.getImageResourceManager().LoadImage("Images/player.png", "player");
+		GameObjectManager.getImageResourceManager().LoadImage("Images/player_m.png", "player_m");
 		image = GameObjectManager.getImageResourceManager().GetImage("player");
 
 		_viewport = GameObjectManager.getViewport();
@@ -45,6 +53,8 @@ public class Player extends GameObject implements Collider {
 		_downButton = GameObjectManager.getInputManager().buttons[6];
 
 		Init();
+		_monoPlayer = new MonoPlayer(this);
+		_viewport.children.add(_monoPlayer);
 	}
 
 	void Init() {
@@ -60,6 +70,19 @@ public class Player extends GameObject implements Collider {
 	@Override
 	public void Update() {
 		super.Update();
+		if (_hitCount > 0) {
+			_hitCount -= Time.getTime().getDeltaTime();
+			if (_hitCount <= 0) _hitCount = 0;
+		}
+		if (_currentLife < _maxLife) {
+			_currentLife += _regen * Time.getTime().getDeltaTime();
+			if (_currentLife >=_maxLife) {
+				_currentLife = _maxLife;
+				alpha = 1;
+			}else {
+				alpha = (float) (_currentLife / _maxLife);
+			}
+		}
 
 		// Move by arrow buttons
 		if (_leftButton.isPressed && pos_x > -(_settings.canvas_width / 2 - radius_x))
@@ -72,7 +95,9 @@ public class Player extends GameObject implements Collider {
 			pos_y -= Time.getTime().getDeltaTime() * _speed;
 
 		// Fire
-		if (_space.isPressed) _weapon.Fire();
+		if (_space.isPressed && alpha > 0.7) _weapon.Fire();
+
+		_monoPlayer.Update();
 	}
 
 	@Override
@@ -80,8 +105,36 @@ public class Player extends GameObject implements Collider {
 		return Tag.Player;
 	}
 
+	public void GotHit(){
+		if (_hitCount == 0) {
+			_currentLife -= 40;
+			if (_currentLife < 0) _currentLife = 0;
+
+			_hitCount = _hitTime;
+		}
+	}
+
 	@Override
 	public boolean IsCollided(Collider other) {
 		return other.getTag() == Tag.Enemy || other.getTag() == Tag.EnemyBullet;
+	}
+
+	private class MonoPlayer extends GameObject {
+		private Player _origin;
+		MonoPlayer(Player player) {
+			_origin = player;
+			pos_x = _origin.pos_x;
+			pos_y = _origin.pos_y;
+			pos_z = _origin.pos_z;
+			radius_x = _origin.radius_x;
+			radius_y = _origin.radius_y;
+			image = GameObjectManager.getImageResourceManager().GetImage("player_m");
+		}
+
+		@Override
+		public void Update() {
+			pos_x = _origin.pos_x;
+			pos_y = _origin.pos_y;
+		}
 	}
 }

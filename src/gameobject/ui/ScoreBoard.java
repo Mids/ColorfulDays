@@ -44,4 +44,10 @@ public class ScoreBoard extends TextBox {
 		// Colorize background
 		((BackGround) GameObjectManager.GetObject("BackGround")).Colorize(1);
 	}
+
+	@Override
+	public void Draw(Graphics2D g) {
+		g.setComposite(AlphaComposite.getInstance(AlphaComposite.SRC_OVER, 1));
+		super.Draw(g);
+	}
 }

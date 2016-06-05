@@ -39,7 +39,7 @@ public abstract class EnemyBullet extends Bullet {
 
 			// TODO: Hit player
 			if (_player.HitTest3D(this)) {
-//				System.out.println("Game Over!!");
+				_player.GotHit();
 			}
 		}
 	}
