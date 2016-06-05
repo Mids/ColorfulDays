@@ -9,6 +9,7 @@ import java.awt.*;
  */
 public class BossCirclePattern extends Weapon {
 	public final double _absSpeed = 600;
+	protected double angle;
 	private Boss _boss;
 
 	public BossCirclePattern(Boss boss) {
@@ -18,12 +19,13 @@ public class BossCirclePattern extends Weapon {
 
 	@Override
 	public void Init() {
+		angle = 2 * Math.PI / _numOfBullets;
 		super.Init();
 	}
 
 	@Override
 	public int getNumOfBullets() {
-		return 25;
+		return 30;
 	}
 
 	@Override
@@ -45,7 +47,6 @@ public class BossCirclePattern extends Weapon {
 
 	@Override
 	public void Fire() {
-		super.Fire();
 		for (Bullet bullet : _bullets) {
 			bullet.Fire();
 		}
@@ -53,8 +54,6 @@ public class BossCirclePattern extends Weapon {
 
 	@Override
 	protected void CreateBullets() {
-		double angle = 2 * Math.PI / _numOfBullets;
-
 		_bullets = new Bullet[_numOfBullets];
 		for (int i = 0; i < _numOfBullets; i++) {
 			Bullet bullet = getBullet();

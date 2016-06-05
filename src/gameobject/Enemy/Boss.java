@@ -24,7 +24,7 @@ public class Boss extends Enemy {
 
 	private double _coolTime = 2;
 	private double _coolDown = _coolTime;
-	private Weapon[] _weapons = {new BossCirclePattern(this)};
+	private Weapon[] _weapons = {new BossCirclePattern(this), new BossAtPattern(this)};
 
 	@Override
 	public void Init() {
