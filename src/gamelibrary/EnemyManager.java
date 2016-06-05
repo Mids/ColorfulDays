@@ -22,7 +22,7 @@ public abstract class EnemyManager extends GameObject {
 	private int offset;
 
 	public void RegenerateEnemy() {
-		_enemies[offset].pos_x = _random.nextInt(_settings.canvas_width - (int) _enemies[offset].radius_x * 2) - _settings.canvas_width / 2 + _enemies[offset].radius_x;
+		_enemies[offset].pos_x = _random.nextInt(_settings.canvas_width - (int) _enemies[offset].radius_x * 4) - _settings.canvas_width / 2 + _enemies[offset].radius_x;
 		_enemies[offset].pos_y = _settings.canvas_height / 2 + _enemies[offset].radius_y;
 		_enemies[offset]._isActive = true;
 

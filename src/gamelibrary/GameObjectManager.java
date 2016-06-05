@@ -121,8 +121,12 @@ public final class GameObjectManager {
 		_next = true;
 	}
 
-	public static void End(){
+	public static void End() {
 		System.out.println("End");
 		_end = true;
+	}
+
+	public static int getCurrentStage() {
+		return _currentStage + 1;
 	}
 }

@@ -60,7 +60,7 @@ public class Player extends GameObject implements Collider {
 	void Init() {
 		// TODO: Find out how to get image size
 		pos_x = 0;
-		pos_y = -(_settings.canvas_height / 2 - 50);
+		pos_y = -(_settings.canvas_height / 2 - 200);
 		pos_z = 0;
 		radius_x = 50;
 		radius_y = 50;
@@ -85,14 +85,18 @@ public class Player extends GameObject implements Collider {
 		}
 
 		// Move by arrow buttons
-		if (_leftButton.isPressed && pos_x > -(_settings.canvas_width / 2 - radius_x))
+		if (_leftButton.isPressed && pos_x > -(_settings.canvas_width / 2 - 2 * radius_x))
 			pos_x -= Time.getTime().getDeltaTime() * _speed;
-		if (_rightButton.isPressed && pos_x < _settings.canvas_width / 2 - radius_x)
+		if (_rightButton.isPressed && pos_x < _settings.canvas_width / 2 - 2 * radius_x)
 			pos_x += Time.getTime().getDeltaTime() * _speed;
-		if (_upButton.isPressed && pos_y < _settings.canvas_height / 2 - radius_y)
-			pos_y += Time.getTime().getDeltaTime() * _speed;
-		if (_downButton.isPressed && pos_y > -(_settings.canvas_height / 2 - radius_y))
-			pos_y -= Time.getTime().getDeltaTime() * _speed;
+		if (GameObjectManager.getCurrentStage() != 1) {
+			if (_upButton.isPressed && pos_y < _settings.canvas_height / 2 - radius_y)
+				pos_y += Time.getTime().getDeltaTime() * _speed;
+			if (_downButton.isPressed && pos_y > -(_settings.canvas_height / 2 - radius_y))
+				pos_y -= Time.getTime().getDeltaTime() * _speed;
+		}
+
+		System.out.println(pos_x + ", " + pos_y);
 
 		// Fire
 		if (_space.isPressed && alpha > 0.7) _weapon.Fire();
