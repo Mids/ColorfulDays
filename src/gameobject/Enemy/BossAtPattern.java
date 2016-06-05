@@ -35,6 +35,7 @@ public class BossAtPattern extends BossCirclePattern {
 
 	@Override
 	public void Update() {
+		//noinspection Duplicates
 		if (_isFiring) {
 			if (_firingTime > MINDELAY) {
 				DelayedFire();
