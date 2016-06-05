@@ -16,8 +16,6 @@ public abstract class Enemy extends GameObject implements Collider {
 	public void Init() {
 		_player = (Player) GameObjectManager.GetObject("Player");
 		pos_y = GameObjectManager.getGameFrameSettings().canvas_height;
-		radius_x = 50;
-		radius_y = 50;
 		_isColored = false;
 		_isActive = false;
 		_backgroundSpeed = BackGround.SPEED;

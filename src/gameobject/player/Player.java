@@ -76,10 +76,10 @@ public class Player extends GameObject implements Collider {
 		}
 		if (_currentLife < _maxLife) {
 			_currentLife += _regen * Time.getTime().getDeltaTime();
-			if (_currentLife >=_maxLife) {
+			if (_currentLife >= _maxLife) {
 				_currentLife = _maxLife;
 				alpha = 1;
-			}else {
+			} else {
 				alpha = (float) (_currentLife / _maxLife);
 			}
 		}
@@ -105,7 +105,7 @@ public class Player extends GameObject implements Collider {
 		return Tag.Player;
 	}
 
-	public void GotHit(){
+	public void GotHit() {
 		if (_hitCount == 0) {
 			_currentLife -= 40;
 			if (_currentLife < 0) _currentLife = 0;
@@ -121,6 +121,7 @@ public class Player extends GameObject implements Collider {
 
 	private class MonoPlayer extends GameObject {
 		private Player _origin;
+
 		MonoPlayer(Player player) {
 			_origin = player;
 			pos_x = _origin.pos_x;

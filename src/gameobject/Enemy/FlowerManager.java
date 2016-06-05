@@ -4,6 +4,9 @@ import gamelibrary.Enemy;
 import gamelibrary.EnemyManager;
 import gamelibrary.GameObjectManager;
 
+import java.awt.*;
+import java.util.Random;
+
 /**
  * Created by jiny1 on 5/16/2016.
  */
@@ -13,8 +16,12 @@ public class FlowerManager extends EnemyManager {
 
 	@Override
 	protected void InitEnemyImages() {
-		GameObjectManager.getImageResourceManager().LoadImage("Images/flowers/flower_red.png", "flower_red");
-		GameObjectManager.getImageResourceManager().LoadImage("Images/flowers/flower_red_m.png", "flower_red_m");
+		GameObjectManager.getImageResourceManager().LoadImage("Images/flowers/lotus1.png", "lotus1");
+		GameObjectManager.getImageResourceManager().LoadImage("Images/flowers/lotus1_m.png", "lotus1_m");
+		GameObjectManager.getImageResourceManager().LoadImage("Images/flowers/lotus2.png", "lotus2");
+		GameObjectManager.getImageResourceManager().LoadImage("Images/flowers/lotus2_m.png", "lotus2_m");
+		GameObjectManager.getImageResourceManager().LoadImage("Images/flowers/wflower.png", "wflower");
+		GameObjectManager.getImageResourceManager().LoadImage("Images/flowers/wflower_m.png", "wflower_m");
 	}
 
 	@Override
@@ -39,16 +46,38 @@ public class FlowerManager extends EnemyManager {
 
 	// Flower
 	private class Flower extends Enemy {
+		private Image colorImage;
+		private Random _random = new Random();
+
 		@Override
 		public void Init() {
 			super.Init();
-			image = GameObjectManager.getImageResourceManager().GetImage("flower_red_m");
+			switch (_random.nextInt(3)) {
+				case 0:
+					image = GameObjectManager.getImageResourceManager().GetImage("lotus1_m");
+					colorImage = GameObjectManager.getImageResourceManager().GetImage("lotus1");
+					radius_x = 50;
+					radius_y = 27;
+					break;
+				case 1:
+					image = GameObjectManager.getImageResourceManager().GetImage("lotus2_m");
+					colorImage = GameObjectManager.getImageResourceManager().GetImage("lotus2");
+					radius_x = 50;
+					radius_y = 30;
+					break;
+				case 2:
+					image = GameObjectManager.getImageResourceManager().GetImage("wflower_m");
+					colorImage = GameObjectManager.getImageResourceManager().GetImage("wflower");
+					radius_x = 50;
+					radius_y = 42.5;
+					break;
+			}
 		}
 
 		@Override
 		public void Colorize() {
 			super.Colorize();
-			image = GameObjectManager.getImageResourceManager().GetImage("flower_red");
+			image = colorImage;
 		}
 	}
 }

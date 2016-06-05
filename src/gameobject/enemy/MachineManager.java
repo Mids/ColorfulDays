@@ -57,6 +57,8 @@ public class MachineManager extends EnemyManager {
 		public void Init() {
 			super.Init();
 			image = GameObjectManager.getImageResourceManager().GetImage("machine_m");
+			radius_x = 50;
+			radius_y = 50;
 			randStart = _random.nextDouble() * 2 * PI;
 			_canvasHeight = GameObjectManager.getGameFrameSettings().canvas_height;
 		}
