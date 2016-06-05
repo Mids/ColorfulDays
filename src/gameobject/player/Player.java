@@ -107,7 +107,7 @@ public class Player extends GameObject implements Collider {
 
 	public void GotHit() {
 		if (_hitCount == 0) {
-			_currentLife -= 40;
+			_currentLife -= 50;
 			if (_currentLife < 0) _currentLife = 0;
 
 			_hitCount = _hitTime;
