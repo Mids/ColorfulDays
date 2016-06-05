@@ -5,16 +5,19 @@ import gamelibrary.*;
 import java.awt.*;
 import java.util.Random;
 
+import static gamelibrary.GameObjectManager.*;
+
 /**
  * Created by jiny1 on 5/16/2016.
  */
 public class Rifle extends Weapon {
 	private final int NUMBEROFBULLETS = 20;
 	private final double COOLTIME = 0.15;
+	private Image[] _bulletImages = new Image[5];
 
 	@Override
 	public void Start() {
-		GameObjectManager.PutObject(this, "Rifle");
+		PutObject(this, "Rifle");
 	}
 
 	@Override
@@ -24,9 +27,16 @@ public class Rifle extends Weapon {
 
 	@Override
 	public void Awake() {
-		GameObjectManager.getImageResourceManager().CreateTempImage(Color.RED, "bullet_r");
-		GameObjectManager.getImageResourceManager().CreateTempImage(Color.GREEN, "bullet_g");
-		GameObjectManager.getImageResourceManager().CreateTempImage(Color.BLUE, "bullet_b");
+		getImageResourceManager().LoadImage("Images/player/bullet_r.png", "bullet_r");
+		getImageResourceManager().LoadImage("Images/player/bullet_g.png", "bullet_g");
+		getImageResourceManager().LoadImage("Images/player/bullet_b.png", "bullet_b");
+		getImageResourceManager().LoadImage("Images/player/bullet_p.png", "bullet_p");
+		getImageResourceManager().LoadImage("Images/player/bullet_y.png", "bullet_y");
+		_bulletImages[0] = getImageResourceManager().GetImage("bullet_r");
+		_bulletImages[1] = getImageResourceManager().GetImage("bullet_g");
+		_bulletImages[2] = getImageResourceManager().GetImage("bullet_b");
+		_bulletImages[3] = getImageResourceManager().GetImage("bullet_p");
+		_bulletImages[4] = getImageResourceManager().GetImage("bullet_y");
 		super.Awake();
 	}
 
@@ -46,10 +56,10 @@ public class Rifle extends Weapon {
 		private Random _rand = new Random();
 
 		RifleBullet() {
-			_player = GameObjectManager.GetObject("Player");
-			_canvasHeight = GameObjectManager.getGameFrameSettings().canvas_height;
-			radius_x = 5;
-			radius_y = 5;
+			_player = GetObject("Player");
+			_canvasHeight = getGameFrameSettings().canvas_height;
+			radius_x = 18;
+			radius_y = 23.5;
 			_speed = new Vector3(0, 600, 0);
 			Init();
 		}
@@ -78,23 +88,15 @@ public class Rifle extends Weapon {
 			pos_x = _player.pos_x;
 			pos_y = _player.pos_y + _player.radius_y / 2;
 			_isActive = true;
+
+			((Player) (GetObject("Player"))).PlayerShotImage();
 		}
 
 		@Override
 		public void Init() {
 			_isActive = false;
 			pos_y = _canvasHeight;
-			switch (_rand.nextInt(3)) {
-				case 0:
-					image = GameObjectManager.getImageResourceManager().GetImage("bullet_r");
-					break;
-				case 1:
-					image = GameObjectManager.getImageResourceManager().GetImage("bullet_g");
-					break;
-				case 2:
-					image = GameObjectManager.getImageResourceManager().GetImage("bullet_b");
-					break;
-			}
+			image = _bulletImages[_rand.nextInt(5)];
 		}
 	}
 }
