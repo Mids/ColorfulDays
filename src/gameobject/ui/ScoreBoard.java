@@ -27,7 +27,7 @@ public class ScoreBoard extends TextBox {
 
 	public void GainPoint() {
 		if (++_score == _scoreToGoNext) {
-			// TODO : Change Stage
+			// Change Stage
 			GameObjectManager.GetObject("EnemyManager").Destroy();
 		}
 		float backgroundAlpha = (_scoreToGoNext - (float) _score % _scoreToGoNext) / _scoreToGoNext;
@@ -36,12 +36,12 @@ public class ScoreBoard extends TextBox {
 		}
 
 		// Colorize background
-		((BackGround) GameObjectManager.GetObject("Background")).Colorize(backgroundAlpha);
+		((BackGround) GameObjectManager.GetObject("BackGround")).Colorize(backgroundAlpha);
 	}
 
 	public void ResetPoint() {
 		_score = 0;
 		// Colorize background
-		((BackGround) GameObjectManager.GetObject("Background")).Colorize(1);
+		((BackGround) GameObjectManager.GetObject("BackGround")).Colorize(1);
 	}
 }

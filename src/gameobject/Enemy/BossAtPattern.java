@@ -7,7 +7,7 @@ import gamelibrary.Time;
  * Created by jiny1 on 6/5/2016.
  */
 public class BossAtPattern extends BossCirclePattern {
-	private final double ROUND = 2.8;
+	private final double ROUND = 4.8;
 	private final double MINDELAY = 0.02;
 	private int _offset = 0;
 	private boolean _isFiring = false;
@@ -30,7 +30,7 @@ public class BossAtPattern extends BossCirclePattern {
 
 	@Override
 	public int getNumOfBullets() {
-		return 60;
+		return (int) (20 * ROUND);
 	}
 
 	@Override

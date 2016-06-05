@@ -35,7 +35,7 @@ public class BossManager extends EnemyManager {
 
 	@Override
 	public String getNextStage() {
-		return "The end";
+		return "The End";
 	}
 
 	@Override
@@ -63,14 +63,18 @@ public class BossManager extends EnemyManager {
 		}
 
 		// TODO: If destroyed, Reveal The end
+		if (_destroyCount > 0) {
+			_destroyCount -= Time.getTime().getDeltaTime();
+
+			if (!_isStageRevealed && _destroyCount < 3) {
+				GameObjectManager.getStageNumber().Reveal(getNextStage());
+				GameObjectManager.getStageNumber().End();
+				_isStageRevealed = true;
+			}
+		}
 
 		// TODO: Move Boss if Boss is Active
 		if (_boss._isActive)
 			_boss.Update();
-	}
-
-	@Override
-	public void Destroy() {
-
 	}
 }

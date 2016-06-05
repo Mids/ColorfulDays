@@ -12,6 +12,7 @@ import java.awt.*;
 public class StageNumber extends TextBox {
 	private float _timeLeft = 4;
 	private float alpha = 1;
+	private boolean _end = false;
 
 	public StageNumber() {
 		super(0, 0, 600, 800);
@@ -32,6 +33,8 @@ public class StageNumber extends TextBox {
 				alpha = (2 - (_timeLeft % 2)) / 2;
 			} else if (_timeLeft > 2) {
 				alpha = 1;
+			} else if (_end) {
+				GameObjectManager.End();
 			} else if (_timeLeft > 0) {
 				alpha = _timeLeft % 2 / 2;
 			} else {
@@ -51,5 +54,9 @@ public class StageNumber extends TextBox {
 
 		g.setComposite(AlphaComposite.getInstance(AlphaComposite.SRC_OVER, alpha));
 		super.Draw(g);
+	}
+
+	public void End() {
+		_end = true;
 	}
 }

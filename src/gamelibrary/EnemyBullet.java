@@ -47,7 +47,7 @@ public abstract class EnemyBullet extends Bullet {
 	@Override
 	public void Update() {
 		if (_isActive) {
-			if (pos_y < _canvasHeight / 2 + 5) {
+			if (pos_y < _canvasHeight / 2 + 5 && pos_y > -_canvasHeight / 2 - 50) {
 				Move();
 				CheckCollision();
 			} else

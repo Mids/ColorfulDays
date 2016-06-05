@@ -13,13 +13,13 @@ public abstract class EnemyManager extends GameObject {
 	protected GameFrameSettings _settings;
 	protected Viewport _viewport;
 	protected float _waitingTime = 4;
+	protected float _destroyCount = -1;
+	protected boolean _isStageRevealed = false;
 	private float _regenTime;
 	private int _numOfEnemies;
 	private Enemy[] _enemies;
 	private float _timeLeft;
 	private int offset;
-	private float _destroyCount = -1;
-	private boolean _isStageRevealed = false;
 
 	public void RegenerateEnemy() {
 		_enemies[offset].pos_x = _random.nextInt(_settings.canvas_width - (int) _enemies[offset].radius_x * 2) - _settings.canvas_width / 2 + _enemies[offset].radius_x;

@@ -17,7 +17,7 @@ public class BackGround extends GameObject {
 
 	@Override
 	public void Start() {
-		GameObjectManager.PutObject(this, "Background");
+		GameObjectManager.PutObject(this, "BackGround");
 	}
 
 	@Override

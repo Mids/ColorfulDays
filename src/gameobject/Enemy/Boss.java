@@ -21,10 +21,11 @@ public class Boss extends Enemy {
 	private double _entranceTime = 3;
 	private int _maxLife = 10;
 	private int _currentLife = _maxLife;
+	private BackGround _backGround;
 
 	private double _coolTime = 2;
 	private double _coolDown = _coolTime;
-	private Weapon[] _weapons = {new BossCirclePattern(this), new BossAtPattern(this), new BossLaserPattern(this)};
+	private Weapon[] _weapons = {new BossCirclePattern(this), new BossAtPattern(this), new BossLaserPattern(this), new BossAccelPattern(this)};
 
 	@Override
 	public void Init() {
@@ -52,8 +53,11 @@ public class Boss extends Enemy {
 		if (_currentLife > 0) {
 			_currentLife--;
 			alpha = (float) _currentLife / _maxLife;
+			if (_backGround == null) _backGround = (BackGround) GameObjectManager.GetObject("BackGround");
+			_backGround.Colorize(alpha);
 		} else {
-			super.Colorize();
+			_isColored = true;
+			GameObjectManager.GetObject("EnemyManager").Destroy();
 		}
 	}
 
@@ -62,9 +66,7 @@ public class Boss extends Enemy {
 		if (_entranceTime > 0) {
 			Move();
 			_entranceTime -= Time.getTime().getDeltaTime();
-		}
-
-		if (!_isColored) {
+		} else if (!_isColored) {
 			CheckCollision();
 			Fire();
 		}

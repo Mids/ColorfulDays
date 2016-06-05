@@ -25,6 +25,7 @@ public final class GameObjectManager {
 	private static boolean _next = false;
 	private static int _currentStage = 0;
 	private static int _totalStage;
+	private static boolean _end = false;
 
 	@SuppressWarnings("unchecked")
 	private static Class<? extends EnemyManager>[] _managers = new Class[]{AnimalManager.class, MachineManager.class, BossManager.class};
@@ -66,6 +67,8 @@ public final class GameObjectManager {
 	}
 
 	public static void Update() {
+		if (_end) return;
+
 		if (_next && _currentStage < _totalStage) {
 			try {
 				_managers[_currentStage++].newInstance().Awake();
@@ -116,5 +119,10 @@ public final class GameObjectManager {
 
 	public static void NextStage() {
 		_next = true;
+	}
+
+	public static void End(){
+		System.out.println("End");
+		_end = true;
 	}
 }
