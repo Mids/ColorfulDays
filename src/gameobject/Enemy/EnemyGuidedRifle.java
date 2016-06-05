@@ -17,6 +17,11 @@ public class EnemyGuidedRifle extends EnemyRifle {
 		return new EnemyGuidedRifleBullet();
 	}
 
+	@Override
+	protected double getCoolTime() {
+		return 0.8;
+	}
+
 	private class EnemyGuidedRifleBullet extends EnemyRifleBullet {
 		private final double _absSpeed = 600;
 

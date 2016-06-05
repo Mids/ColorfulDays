@@ -4,6 +4,7 @@
     <root id="archive" name="TestProject.jar">
       <element id="module-output" name="TestProject" />
       <element id="module-output" name="LOOT" />
+      <element id="dir-copy" path="$PROJECT_DIR$/Images" />
     </root>
   </artifact>
 </component>

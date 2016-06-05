@@ -11,7 +11,7 @@ import java.awt.*;
  */
 public class ScoreBoard extends TextBox {
 	private int _score = 0;
-	private int _scoreToGoNext = 10;
+	private int _scoreToGoNext = 20;
 
 	public ScoreBoard() {
 		super(10, 10, 200, 70);

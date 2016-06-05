@@ -58,8 +58,8 @@ public class Rifle extends Weapon {
 		RifleBullet() {
 			_player = GetObject("Player");
 			_canvasHeight = getGameFrameSettings().canvas_height;
-			radius_x = 18;
-			radius_y = 23.5;
+			radius_x = 9;
+			radius_y = 11.75;
 			_speed = new Vector3(0, 600, 0);
 			Init();
 		}
