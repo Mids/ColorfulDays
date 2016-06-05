@@ -9,7 +9,7 @@ import java.awt.*;
  */
 public class BossAccelPattern extends Weapon {
 	private final double STARTSPEED = 600;
-	private final int WAYS = 8;
+	private final int WAYS = 7;
 	private final int WAVES = 8;
 	private final double XSPEED = 300;
 	private final double MINDELAY = 0.1;
@@ -26,7 +26,7 @@ public class BossAccelPattern extends Weapon {
 
 	@Override
 	public void Init() {
-		angle = 2 * Math.PI / 4 / (WAYS - 1);
+		angle = (2 * Math.PI) / 4 / (WAYS - 1);
 		super.Init();
 	}
 

@@ -35,7 +35,7 @@ public class BossManager extends EnemyManager {
 
 	@Override
 	public String getNextStage() {
-		return "The End";
+		return "TheEnd";
 	}
 
 	@Override

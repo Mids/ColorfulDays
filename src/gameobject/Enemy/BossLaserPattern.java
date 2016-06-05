@@ -9,7 +9,7 @@ import java.awt.*;
  */
 public class BossLaserPattern extends Weapon {
 	public final double _absSpeed = 600;
-	private final int WAYS = 6;
+	private final int WAYS = 5;
 	private final double STARTANGLE = Math.PI * 3 / 4;
 	private final double MINDELAY = 0.02;
 	protected double angle;
@@ -25,7 +25,7 @@ public class BossLaserPattern extends Weapon {
 
 	@Override
 	public void Init() {
-		angle = 2 * Math.PI / 4 / (WAYS - 1);
+		angle = (2 * Math.PI) / 4 / (WAYS - 1);
 		super.Init();
 	}
 

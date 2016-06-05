@@ -45,7 +45,7 @@ public class MachineManager extends EnemyManager {
 
 	@Override
 	public String getNextStage() {
-		return "Boss";
+		return " BOSS ";
 	}
 
 	private class Machine extends Enemy {

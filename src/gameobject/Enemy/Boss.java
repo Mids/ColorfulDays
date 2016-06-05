@@ -7,19 +7,14 @@ import gameobject.ui.BackGround;
 import java.awt.*;
 import java.util.Random;
 
-import static java.lang.Math.PI;
-
 /**
  * Created by jiny1 on 6/4/2016.
  */
 public class Boss extends Enemy {
 	public ColorBoss _colorBoss;
 	protected Random _random;
-	private Vector3 _speed = new Vector3(300, 0, 0);
-	private double randStart;
-	private int _canvasHeight;
 	private double _entranceTime = 3;
-	private int _maxLife = 10;
+	private int _maxLife = 100;
 	private int _currentLife = _maxLife;
 	private BackGround _backGround;
 
@@ -42,8 +37,6 @@ public class Boss extends Enemy {
 		GameObjectManager.getImageResourceManager().CreateTempImage(Color.lightGray, "boss");
 		image = GameObjectManager.getImageResourceManager().GetImage("boss");
 		_random = new Random();
-		randStart = _random.nextDouble() * 2 * PI;
-		_canvasHeight = GameObjectManager.getGameFrameSettings().canvas_height;
 
 		_colorBoss = new ColorBoss(this);
 	}
