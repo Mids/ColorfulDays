@@ -78,7 +78,18 @@ public class Boss extends Enemy {
 			return;
 		}
 		_coolDown = _coolTime;
-		_weapons[_random.nextInt(_weapons.length)].Fire();
+
+		if ((double) _currentLife / _maxLife < 0.5) {
+			int a = _random.nextInt(_weapons.length);
+			int b = a;
+			while (a == b) {
+				b = _random.nextInt(_weapons.length);
+			}
+			_weapons[a].Fire();
+			_weapons[b].Fire();
+		} else {
+			_weapons[_random.nextInt(_weapons.length)].Fire();
+		}
 	}
 
 	class ColorBoss extends GameObject {
