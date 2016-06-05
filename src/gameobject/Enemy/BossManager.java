@@ -46,7 +46,7 @@ public class BossManager extends EnemyManager {
 		_random = new Random();
 		_isActive = false;
 
-		// TODO: Create Boss
+		// Create Boss
 		_boss = new Boss();
 		_boss.Init();
 		_viewport.children.add(_boss);

@@ -31,6 +31,7 @@ public abstract class Weapon extends GameObject {
 		for (int i = 0; i < _numOfBullets; i++) {
 			Bullet bullet = getBullet();
 			_viewport.children.add(bullet);
+			bullet.Init();
 			_bullets[i] = bullet;
 		}
 	}
@@ -38,7 +39,7 @@ public abstract class Weapon extends GameObject {
 	public void Init(){
 		if (_bullets == null) {
 			CreateBullets();
-		}else {
+		} else {
 			InitBullets();
 		}
 	}
