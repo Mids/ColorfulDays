@@ -10,10 +10,10 @@ import gameobject.ui.ScoreBoard;
 import gameobject.ui.StageNumber;
 import loot.GameFrame;
 import loot.GameFrameSettings;
+import loot.InputManager.ButtonState;
 import loot.graphics.Viewport;
 
 import java.awt.event.KeyEvent;
-import java.awt.event.MouseEvent;
 
 @SuppressWarnings("serial")
 public class NewGameFrame extends GameFrame {
@@ -23,6 +23,9 @@ public class NewGameFrame extends GameFrame {
 	EnemyManager enemyManager;
 	BackGround backGround;
 	StageNumber stageNumber;
+	ButtonState _esc;
+
+	boolean _pause = false;
 
 	public NewGameFrame(GameFrameSettings settings) {
 		super(settings);
@@ -61,11 +64,13 @@ public class NewGameFrame extends GameFrame {
 		// Input settings
 		inputs.BindKey(KeyEvent.VK_E, 0);
 		inputs.BindKey(KeyEvent.VK_SPACE, 1);
-		inputs.BindMouseButton(MouseEvent.BUTTON1, 2);
+		inputs.BindKey(KeyEvent.VK_ESCAPE, 2);
 		inputs.BindKey(KeyEvent.VK_LEFT, 3);
 		inputs.BindKey(KeyEvent.VK_RIGHT, 4);
 		inputs.BindKey(KeyEvent.VK_UP, 5);
 		inputs.BindKey(KeyEvent.VK_DOWN, 6);
+
+		_esc = inputs.buttons[2];
 
 		GameObjectManager.Awake();
 
@@ -78,7 +83,14 @@ public class NewGameFrame extends GameFrame {
 		inputs.AcceptInputs(); // 이제까지 들어온 입력을 가상 버튼에 반영
 
 		Time.getTime().UpdateTime();
-		GameObjectManager.Update();
+
+		if (_esc.IsPressedNow()) {
+			_pause = !_pause;
+		}
+
+		if (!_pause) {
+			GameObjectManager.Update();
+		}
 
 		return true;
 	}
