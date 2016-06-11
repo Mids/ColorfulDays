@@ -39,6 +39,7 @@ public class NewGameFrame extends GameFrame {
 		GameObjectManager.setImageResourceManager(images);
 		GameObjectManager.setInputManager(inputs);
 		GameObjectManager.setGameFrameSettings(settings);
+		GameObjectManager.setAudioManager(audios);
 
 		viewport = new Viewport(0, 0, settings.canvas_width, settings.canvas_height);
 		GameObjectManager.setViewport(viewport);
@@ -69,6 +70,17 @@ public class NewGameFrame extends GameFrame {
 		inputs.BindKey(KeyEvent.VK_RIGHT, 4);
 		inputs.BindKey(KeyEvent.VK_UP, 5);
 		inputs.BindKey(KeyEvent.VK_DOWN, 6);
+
+		audios.LoadAudio("Sounds/bgm.wav", "bgm", 1);
+		audios.LoadAudio("Sounds/fire.wav", "fire", 5);
+		audios.LoadAudio("Sounds/enemy_die.wav", "enemy_die", 5);
+		audios.LoadAudio("Sounds/boss.wav", "boss", 1);
+		audios.LoadAudio("Sounds/boss_die.wav", "boss_die", 1);
+		audios.LoadAudio("Sounds/danger.wav", "danger", 1);
+		audios.LoadAudio("Sounds/boss_attack.wav", "boss_attack", 2);
+		audios.LoadAudio("Sounds/boss_attack2.wav", "boss_attack2", 2);
+		audios.LoadAudio("Sounds/clear.wav", "clear", 1);
+		audios.Play("bgm");
 
 		_esc = inputs.buttons[2];
 

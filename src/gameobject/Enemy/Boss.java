@@ -4,7 +4,6 @@ import gamelibrary.*;
 import gameobject.player.Player;
 import gameobject.ui.BackGround;
 
-import java.awt.*;
 import java.util.Random;
 
 /**
@@ -17,6 +16,9 @@ public class Boss extends Enemy {
 	private int _maxLife = 100;
 	private int _currentLife = _maxLife;
 	private BackGround _backGround;
+	private boolean _isGreen = false;
+	private boolean _startAttack = true;
+	private boolean _isBerserk = false;
 
 	private double _coolTime = 2;
 	private double _coolDown = _coolTime;
@@ -27,15 +29,16 @@ public class Boss extends Enemy {
 		_player = (Player) GameObjectManager.GetObject("Player");
 		pos_y = GameObjectManager.getGameFrameSettings().canvas_height;
 		radius_x = 250;
-		radius_y = 100;
+		radius_y = 179;
 		_isColored = false;
 		_isActive = true;
 		_backgroundSpeed = BackGround.SPEED;
 		for (Weapon weapon : _weapons) {
 			weapon.Awake();
 		}
-		GameObjectManager.getImageResourceManager().CreateTempImage(Color.lightGray, "boss");
-		image = GameObjectManager.getImageResourceManager().GetImage("boss");
+		GameObjectManager.getImageResourceManager().LoadImage("Images/boss/Stage3_Frog1.png", "boss_m");
+		GameObjectManager.getImageResourceManager().LoadImage("Images/boss/Stage3_Frog2.png", "boss_g");
+		image = GameObjectManager.getImageResourceManager().GetImage("boss_m");
 		_random = new Random();
 
 		_colorBoss = new ColorBoss(this);
@@ -48,8 +51,13 @@ public class Boss extends Enemy {
 			alpha = (float) _currentLife / _maxLife;
 			if (_backGround == null) _backGround = (BackGround) GameObjectManager.GetObject("BackGround");
 			_backGround.Colorize(alpha);
+			if (_currentLife < 50 && !_isBerserk) {
+				GameObjectManager.getAudioManager().Play("danger");
+				_isBerserk = true;
+			}
 		} else {
 			_isColored = true;
+			GameObjectManager.getAudioManager().Play("boss_die");
 			GameObjectManager.GetObject("EnemyManager").Destroy();
 		}
 	}
@@ -59,6 +67,10 @@ public class Boss extends Enemy {
 		if (_entranceTime > 0) {
 			Move();
 			_entranceTime -= Time.getTime().getDeltaTime();
+			if (_entranceTime < 1 && _startAttack) {
+				GameObjectManager.getAudioManager().Play("boss");
+				_startAttack = false;
+			}
 		} else if (!_isColored) {
 			CheckCollision();
 			Fire();
@@ -79,6 +91,15 @@ public class Boss extends Enemy {
 		}
 		_coolDown = _coolTime;
 
+		switch (_random.nextInt(2)) {
+			case 0:
+				GameObjectManager.getAudioManager().Play("boss_attack");
+				break;
+			case 1:
+				GameObjectManager.getAudioManager().Play("boss_attack2");
+				break;
+		}
+
 		if ((double) _currentLife / _maxLife < 0.5) {
 			int a = _random.nextInt(_weapons.length);
 			int b = a;
@@ -92,13 +113,22 @@ public class Boss extends Enemy {
 		}
 	}
 
+	public void MakeGreen(float alpha) {
+		if (!_isGreen) {
+			image = GameObjectManager.getImageResourceManager().GetImage("boss_g");
+			_isGreen = true;
+		}
+
+		this.alpha = alpha;
+	}
+
 	class ColorBoss extends GameObject {
 		private Boss _origin;
 
 		ColorBoss(Boss origin) {
 			_origin = origin;
-			GameObjectManager.getImageResourceManager().CreateTempImage(Color.RED, "color_boss");
-			image = GameObjectManager.getImageResourceManager().GetImage("color_boss");
+			GameObjectManager.getImageResourceManager().LoadImage("Images/boss/Stage3_Frog1_color.png", "boss");
+			image = GameObjectManager.getImageResourceManager().GetImage("boss");
 			radius_x = _origin.radius_x;
 			radius_y = _origin.radius_y;
 			pos_y = _origin.pos_y;

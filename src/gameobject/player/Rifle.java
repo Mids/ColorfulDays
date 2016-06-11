@@ -89,6 +89,7 @@ public class Rifle extends Weapon {
 			pos_y = _player.pos_y + _player.radius_y / 2;
 			_isActive = true;
 
+			GameObjectManager.getAudioManager().Play("fire");
 			((Player) (GetObject("Player"))).PlayerShotImage();
 		}
 

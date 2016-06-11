@@ -12,6 +12,7 @@ import java.util.Random;
  */
 public class BossManager extends EnemyManager {
 	private Boss _boss;
+	private boolean _clearSound = true;
 
 	@Override
 	protected void InitEnemyImages() {
@@ -66,6 +67,15 @@ public class BossManager extends EnemyManager {
 		if (_destroyCount > 0) {
 			_destroyCount -= Time.getTime().getDeltaTime();
 
+			if (_destroyCount < 7 && _destroyCount > 6) {
+				_boss.MakeGreen(7 - _destroyCount);
+				if (_clearSound) {
+					GameObjectManager.getAudioManager().Stop("bgm");
+					GameObjectManager.getAudioManager().Play("clear");
+					_clearSound = false;
+				}
+			}
+
 			if (!_isStageRevealed && _destroyCount < 3) {
 				GameObjectManager.getStageNumber().Reveal(getNextStage());
 				GameObjectManager.getStageNumber().End();
@@ -76,5 +86,10 @@ public class BossManager extends EnemyManager {
 		// TODO: Move Boss if Boss is Active
 		if (_boss._isActive)
 			_boss.Update();
+	}
+
+	@Override
+	public void Destroy() {
+		_destroyCount = 9;
 	}
 }

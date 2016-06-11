@@ -5,6 +5,7 @@ import gameobject.enemy.BossManager;
 import gameobject.enemy.MachineManager;
 import gameobject.ui.ScoreBoard;
 import gameobject.ui.StageNumber;
+import loot.AudioManager;
 import loot.GameFrameSettings;
 import loot.ImageResourceManager;
 import loot.InputManager;
@@ -18,6 +19,7 @@ public final class GameObjectManager {
 	private static Map<String, GameObject> GameObjectMap = new HashMap<>();
 	private static ImageResourceManager imageResourceManager;
 	private static InputManager inputManager;
+	private static AudioManager audioManager;
 	private static Viewport viewport;
 	private static GameFrameSettings gameFrameSettings;
 	private static ScoreBoard scoreBoard;
@@ -128,5 +130,13 @@ public final class GameObjectManager {
 
 	public static int getCurrentStage() {
 		return _currentStage + 1;
+	}
+
+	public static AudioManager getAudioManager() {
+		return audioManager;
+	}
+
+	public static void setAudioManager(AudioManager audioManager) {
+		GameObjectManager.audioManager = audioManager;
 	}
 }
