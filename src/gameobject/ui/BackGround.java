@@ -29,7 +29,10 @@ public class BackGround extends GameObject {
 		GameObjectManager.getImageResourceManager().LoadImage("Images/background/Stage1_background_m.png", "bridge_m");
 		GameObjectManager.getImageResourceManager().LoadImage("Images/background/Stage1_back_water.png", "backwater");
 		GameObjectManager.getImageResourceManager().LoadImage("Images/background/Stage1_back_water_m.png", "backwater_m");
-		GameObjectManager.getImageResourceManager().LoadImage("Images/background_m.jpg", "background_m");
+		GameObjectManager.getImageResourceManager().LoadImage("Images/background/Stage2_background.png", "background2");
+		GameObjectManager.getImageResourceManager().LoadImage("Images/background/Stage2_background_m.png", "background2_m");
+		GameObjectManager.getImageResourceManager().LoadImage("Images/background/Stage3_background.png", "background3");
+		GameObjectManager.getImageResourceManager().LoadImage("Images/background/Stage3_background_m.png", "background3_m");
 		image = GameObjectManager.getImageResourceManager().GetImage("backwater");
 		_bridge = new Bridge(this);
 		_bridge.image = GameObjectManager.getImageResourceManager().GetImage("bridge");
@@ -64,7 +67,30 @@ public class BackGround extends GameObject {
 
 	public void Colorize(float alpha) {
 		_monoBackground.alpha = alpha;
-		_monoBridge.SetAlpha(alpha);
+		if (_monoBridge != null)
+			_monoBridge.SetAlpha(alpha);
+	}
+
+	public void SetStageBackground(){
+		switch (GameObjectManager.getCurrentStage()) {
+			case 2:
+				_viewport.children.remove(_bridge);
+				_viewport.children.remove(_monoBridge);
+				_bridge = null;
+				_monoBridge = null;
+				image = GameObjectManager.getImageResourceManager().GetImage("background2");
+				_monoBackground.image = GameObjectManager.getImageResourceManager().GetImage("background2_m");
+				radius_y = 2400;
+				_monoBackground.radius_y = 2400;
+				break;
+			case 3:
+				image = GameObjectManager.getImageResourceManager().GetImage("background3");
+				_monoBackground.image = GameObjectManager.getImageResourceManager().GetImage("background3_m");
+				radius_y = 2517;
+				_monoBackground.radius_y = 2517;
+				break;
+		}
+
 	}
 
 	private class MonoBackground extends BackGround {

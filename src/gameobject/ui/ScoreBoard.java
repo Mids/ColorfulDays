@@ -43,6 +43,7 @@ public class ScoreBoard extends TextBox {
 		_score = 0;
 		// Colorize background
 		((BackGround) GameObjectManager.GetObject("BackGround")).Colorize(1);
+		((BackGround) GameObjectManager.GetObject("BackGround")).SetStageBackground();
 	}
 
 	@Override
