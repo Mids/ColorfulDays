@@ -86,8 +86,8 @@ public class BackGround extends GameObject {
 			case 3:
 				image = GameObjectManager.getImageResourceManager().GetImage("background3");
 				_monoBackground.image = GameObjectManager.getImageResourceManager().GetImage("background3_m");
-				radius_y = 2517;
-				_monoBackground.radius_y = 2517;
+				radius_y = 2400;
+				_monoBackground.radius_y = 2400;
 				break;
 		}
 
