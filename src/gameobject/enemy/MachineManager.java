@@ -22,10 +22,11 @@ public class MachineManager extends EnemyManager {
 
 	@Override
 	protected void InitEnemyImages() {
-//		GameObjectManager.getImageResourceManager().LoadImage("Images/flowers/flower_blue.png", "flower_blue");
-//		GameObjectManager.getImageResourceManager().LoadImage("Images/flowers/flower_blue_m.png", "flower_blue_m");
-		GameObjectManager.getImageResourceManager().CreateTempImage(Color.red, "machine");
-		GameObjectManager.getImageResourceManager().CreateTempImage(Color.black, "machine_m");
+		GameObjectManager.getImageResourceManager().LoadImage("Images/robots/Stage3_robot.png", "robot_m");
+		GameObjectManager.getImageResourceManager().LoadImage("Images/robots/Stage3_robot_blue.png", "robot_b");
+		GameObjectManager.getImageResourceManager().LoadImage("Images/robots/Stage3_robot_green.png", "robot_g");
+		GameObjectManager.getImageResourceManager().LoadImage("Images/robots/Stage3_robot_red.png", "robot_r");
+		GameObjectManager.getImageResourceManager().LoadImage("Images/robots/Stage3_robot_yellow.png", "robot_y");
 	}
 
 	@Override
@@ -49,6 +50,7 @@ public class MachineManager extends EnemyManager {
 	}
 
 	private class Machine extends Enemy {
+		private Image colorImage;
 		private Vector3 _speed = new Vector3(300, 0, 0);
 		private double randStart;
 		private int _canvasHeight;
@@ -56,8 +58,22 @@ public class MachineManager extends EnemyManager {
 		@Override
 		public void Init() {
 			super.Init();
-			image = GameObjectManager.getImageResourceManager().GetImage("machine_m");
-			radius_x = 50;
+			image = GameObjectManager.getImageResourceManager().GetImage("robot_m");
+			switch (_random.nextInt(4)) {
+				case 0:
+					colorImage = GameObjectManager.getImageResourceManager().GetImage("robot_b");
+					break;
+				case 1:
+					colorImage = GameObjectManager.getImageResourceManager().GetImage("robot_g");
+					break;
+				case 2:
+					colorImage = GameObjectManager.getImageResourceManager().GetImage("robot_r");
+					break;
+				case 3:
+					colorImage = GameObjectManager.getImageResourceManager().GetImage("robot_y");
+					break;
+			}
+			radius_x = 26;
 			radius_y = 50;
 			randStart = _random.nextDouble() * 2 * PI;
 			_canvasHeight = GameObjectManager.getGameFrameSettings().canvas_height;
@@ -72,7 +88,7 @@ public class MachineManager extends EnemyManager {
 		@Override
 		public void Colorize() {
 			super.Colorize();
-			image = GameObjectManager.getImageResourceManager().GetImage("machine");
+			image = colorImage;
 		}
 
 		@Override
